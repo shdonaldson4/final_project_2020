@@ -7,16 +7,29 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(rio)
+library(here)
+library(janitor)
+library(papaja)
+library(tinytex)
+library(knitr)
+library(psych)
 ```
 
-## R Markdown
+## Tidying Data
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+```{r data loading}
+# Step 1: Import
+raw_data = import(here("data", "big5_data.csv"), setclass = "tbl_df")
+kable(head(raw_data), caption = "Brief look at the dataset" )
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+# Step2: Use ONLY US cases
+tidy_data = raw_data %>% 
+  filter(country == "US")
 
-```{r cars}
-summary(cars)
+tidy_data
 ```
 
 ## Including Plots
