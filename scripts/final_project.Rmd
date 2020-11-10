@@ -1,0 +1,157 @@
+---
+title             : "What is the personality structure of US?: A commentary on methods"
+shorttitle        : "Personality structure of US data"
+
+author: 
+  - name          : "Vinita Vader"
+    affiliation   : "1"
+    corresponding : yes    # Define only one corresponding author
+    address       : "Postal address"
+    email         : "vvader@uoregon.edu"
+    role:         # Contributorship roles (e.g., CRediT, https://casrai.org/credit/)
+      - Conceptualization
+      - Writing - Original Draft Preparation
+      - Writing - Review & Editing
+  - name          : "Ernst-August Doelle"
+    affiliation   : "1,2"
+    role:
+      - Writing - Review & Editing
+
+affiliation:
+  - id            : "1"
+    institution   : "Wilhelm-Wundt-University"
+  - id            : "2"
+    institution   : "Konstanz Business School"
+
+authornote: |
+  Add complete departmental affiliations for each author here. Each new line herein must be indented, like this line.
+
+  Enter author note here.
+
+abstract: |
+  One or two sentences providing a **basic introduction** to the field,  comprehensible to a scientist in any discipline.
+  
+  Two to three sentences of **more detailed background**, comprehensible  to scientists in related disciplines.
+  
+  One sentence clearly stating the **general problem** being addressed by  this particular study.
+  
+  One sentence summarizing the main result (with the words "**here we show**" or their equivalent).
+  
+  Two or three sentences explaining what the **main result** reveals in direct comparison to what was thought to be the case previously, or how the  main result adds to previous knowledge.
+  
+  One or two sentences to put the results into a more **general context**.
+  
+  Two or three sentences to provide a **broader perspective**, readily comprehensible to a scientist in any discipline.
+  
+  <!-- https://tinyurl.com/ybremelq -->
+  
+keywords          : "keywords"
+wordcount         : "X"
+
+bibliography      : ["r-references.bib"]
+
+floatsintext      : no
+figurelist        : no
+tablelist         : no
+footnotelist      : no
+linenumbers       : yes
+mask              : no
+draft             : no
+
+documentclass     : "apa6"
+classoption       : "man"
+output            : papaja::apa6_pdf
+---
+
+```{r setup, include = FALSE}
+options(Encoding="UTF-8")
+knitr::opts_chunk$set(
+	eval = T,
+	echo = FALSE,
+	fig.height = 7,
+	fig.width = 8,
+	message = FALSE,
+	errors = TRUE,
+	warnings = FALSE
+)
+library(tidyverse)
+library(rio)
+library(here)
+library(janitor)
+library(papaja)
+library(tinytex)
+library(knitr)
+library(paran)
+library(psych)
+library(factorAnalysis)
+library("papaja")
+library(xlsx)
+r_refs("r-references.bib")
+
+raw_data = import(here("data", "big_data.csv"), setclass = "tbl_df")
+```
+
+```{r analysis-preferences}
+# Seed for random number generation
+set.seed(42)
+knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
+```
+
+
+
+# Methods
+We report how we determined our sample size, all data exclusions (if any), all manipulations, and all measures in the study. <!-- 21-word solution (Simmons, Nelson & Simonsohn, 2012; retrieved from http://ssrn.com/abstract=2160588) -->
+
+## Participants
+
+## Material
+
+## Procedure
+
+## Data analysis
+We used `r cite_r("r-references.bib")` for all our analyses.
+
+```{r Outliers check, eval=FALSE, echo=TRUE, include=FALSE}
+names(raw_data)
+raw_data %>% 
+  mutate_if(is.integer, as.numeric) %>% 
+  select_if(is.numeric) %>% 
+  gather() %>% 
+  ggplot(aes(value)) +
+    facet_wrap(~ key, scales = "free") +
+    geom_boxplot()+
+    theme_minimal()
+
+
+
+dim(raw_data)
+
+
+#final data to be used
+data = raw_data %>% 
+  dplyr::select(-c(race,engnat,hand,source)) %>%  #retain only those columns required for the analysis
+  filter(country == "US", age <= 80 ) #Use ONLY US cases, and age between 18 and 80 years
+
+nrow(raw_data)
+nrow(data)
+
+names(data)
+```
+
+
+
+# Results
+Parallel analysis suggested 7 factors to be retained. Seven factor solution was rotated using varimax and oblimin rotations. 
+# Discussion
+
+
+\newpage
+
+# References
+
+\begingroup
+\setlength{\parindent}{-0.5in}
+\setlength{\leftskip}{0.5in}
+
+<div id="refs" custom-style="Bibliography"></div>
+\endgroup
