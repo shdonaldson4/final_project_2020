@@ -138,6 +138,36 @@ nrow(data)
 names(data)
 ```
 
+```{r Parallel Analysis, echo=FALSE, message=FALSE, warning=FALSE}
+
+paran(data[,4:53], iterations = 500, quietly = F, 
+    status = FALSE, all = FALSE, cfa = FALSE, graph = TRUE, color = TRUE, 
+    col = c("black", "orange", "skyblue"), lty = c(1, 2, 3), lwd = 1, legend = TRUE,
+    file = "", width = 200, height = 200, grdevice = "png", seed = 0)
+
+```
+
+```{r Rotations, message=FALSE, warning=FALSE}
+  ##Varimax rotation
+R.var = principal(data[,4:53], nfactors = 7, rotate = "varimax", normalize = T) #Kaiser normalization will be applied
+raw_var = fa.sort(R.var)
+df_var = data.frame(unclass(raw_var$loadings))
+write.xlsx(df_var, file = "Rotation outputs.xlsx", row.names = TRUE, sheetName = "varimax", append = FALSE)
+
+
+df_var%>% 
+  kable()
+
+  ##Oblimin rotation
+R.ob = principal(data[,4:53], nfactors = 7, rotate = "oblimin", normalize = T)
+struc.mat = R.ob$loadings %*%R.ob$Phi #multiplying the pattern matrix with the covariance matrix from the rotated factors
+df_obl = fa.sort(struc.mat)#Interpreting the Structure matrix
+write.xlsx(df_obl, file = "Rotation outputs.xlsx", row.names = TRUE, sheetName = "oblimin", append = TRUE)
+
+df_obl %>% 
+  kable()
+
+```
 
 
 # Results
