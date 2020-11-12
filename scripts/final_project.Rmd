@@ -74,6 +74,7 @@ knitr::opts_chunk$set(
 	errors = TRUE,
 	warnings = FALSE
 )
+
 library(tidyverse)
 library(rio)
 library(here)
@@ -88,7 +89,7 @@ library("papaja")
 library(xlsx)
 r_refs("r-references.bib")
 
-raw_data = import(here("data", "big_data.csv"), setclass = "tbl_df")
+raw_data = import(here("data", "data.csv"), setclass = "tbl_df")
 ```
 
 ```{r analysis-preferences}
@@ -130,12 +131,11 @@ dim(raw_data)
 #final data to be used
 data = raw_data %>% 
   dplyr::select(-c(race,engnat,hand,source)) %>%  #retain only those columns required for the analysis
-  filter(country == "US", age <= 80 ) #Use ONLY US cases, and age between 18 and 80 years
+  filter(country=="US",age >18 & age<= 80) #Use ONLY US cases, and age between 18 and 80 years
 
-nrow(raw_data)
-nrow(data)
+describe(data)
 
-names(data)
+  
 ```
 
 ```{r Parallel Analysis, echo=FALSE, message=FALSE, warning=FALSE}
