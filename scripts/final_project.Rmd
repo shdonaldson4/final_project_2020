@@ -85,16 +85,17 @@ library(knitr)
 library(paran)
 library(psych)
 library(factorAnalysis)
-library("papaja")
+library("papaja") #Not sure why papaja is in quotes
 library(xlsx)
 r_refs("r-references.bib")
 
-raw_data = import(here("data", "data.csv"), setclass = "tbl_df")
+raw_data <- import(here("data", "data.csv"), setclass = "tbl_df")
+#I changed the = to <- 
 ```
 
 ```{r analysis-preferences}
 # Seed for random number generation
-set.seed(42)
+set.seed(42) #I think you can remove this code chunk 
 knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
 ```
 
@@ -153,7 +154,7 @@ R.var = principal(data[,4:53], nfactors = 7, rotate = "varimax", normalize = T) 
 raw_var = fa.sort(R.var)
 df_var = data.frame(unclass(raw_var$loadings))
 write.xlsx(df_var, file = "Rotation outputs.xlsx", row.names = TRUE, sheetName = "varimax", append = FALSE)
-
+#Nice!!
 
 df_var%>% 
   kable()
