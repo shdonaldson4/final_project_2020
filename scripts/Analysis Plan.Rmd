@@ -1,0 +1,230 @@
+---
+title: "Final Project_Analysis Plan"
+author: "Vinita Vader, Sarah Donaldson, Xiaoyu Liu"
+date: "10/26/2020"
+output:
+  html_document:
+    df_print: paged
+  pdf_document:
+    highlight: haddock
+---
+
+```{r setup, include=FALSE}
+options(Encoding="UTF-8")
+knitr::opts_chunk$set(echo = FALSE,
+                      warnings = FALSE,
+                      message = FALSE,
+                      errors = TRUE,
+                      eval = T,
+                      fig.width = 8, fig.height = 7)
+
+library(tidyverse)
+library(rio)
+library(here)
+library(janitor)
+library(papaja)
+library(tinytex)
+library(knitr)
+library(paran)
+library(psych)
+library(factorAnalysis)
+```
+
+# DATA
+The dataset for the analysis was obtained from $Open-Source Psychometrics Project$ repository. This is the link to the website. [Open Source Psychometric project](https://openpsychometrics.org/_rawdata/).
+It contains data on the Big 5 personality variables $(Extraversion, Neuroticism, Agreeableness, Conscientiousness, Openness to Experience)$ and demographics $(race, age, gender, country)$. 
+
+```{r}
+raw_data = import(here("data", "data.csv"), setclass = "tbl_df")
+kable(head(raw_data), caption = "Brief look at the dataset" )
+  
+```
+
+## Dataset Description 
+ + Demographic varaibles:
+   - $race$  [1=Mixed Race, 2=Arctic (Siberian, Eskimo), 3=Caucasian (European), 4=Caucasian (Indian), 5=Caucasian (Middle East), 6=Caucasian (North African, Other), 7=Indigenous Australian, 8=Native American, 9=North East Asian (Mongol, Tibetan, Korean Japanese, etc), 10=Pacific (Polynesian, Micronesian, etc), 11=South East Asian (Chinese, Thai, Malay, Filipino, etc), 12=West African, Bushmen, Ethiopian, 13=Other (0=missed)]
+   - $age$ [individuals reporting age < 13 were not recorded]
+   - $engnat$ "Is English your native language?" [1=yes, 2=no (0=missed)]
+   - $gender$	[1=Male, 2=Female, 3=Other (0=missed)]
+   - $hand$	"What hand do you use to write with?" [1=Right, 2=Left, 3=Both (0=missed)]
+   
++ Personality varaibles:
+The following items were rated on a five point scale 
+[1=Disagree, 3=Neutral, 5=Agree (0=missed)]
+
+$(R)$ - indicates that the items should be reverse coded for computing scores on that variable. 
+
+   - $Extraversion$
+     - $E1$	I am the life of the party.
+     - $E2$	I don't talk a lot.
+     - $E3$	I feel comfortable around people.
+     - $E4$	I keep in the background.$(R)$
+     - $E5$	I start conversations.
+     - $E6$	I have little to say.$(R)$
+     - $E7$	I talk to a lot of different people at parties.
+     - $E8$	I don't like to draw attention to myself.$(R)$
+     - $E9$	I don't mind being the center of attention.
+     - $E10$	I am quiet around strangers.$(R)$
+     
+   - $Neuroticism$
+     - $N1$	I get stressed out easily.
+     - $N2$	I am relaxed most of the time.$(R)$
+     - $N3$	I worry about things.
+     - $N4$	I seldom feel blue.$(R)$
+     - $N5$	I am easily disturbed.
+     - $N6$	I get upset easily.
+     - $N7$	I change my mood a lot.
+     - $N8$	I have frequent mood swings.
+     - $N9$	I get irritated easily.
+     - $N10$	I often feel blue.
+     
+   - $Agreeablenss$
+     - $A1$	I feel little concern for others.$(R)$
+     - $A2$	I am interested in people.
+     - $A3$	I insult people.$(R)$
+     - $A4$	I sympathize with others' feelings.
+     - $A5$	I am not interested in other people's problems.$(R)$
+     - $A6$	I have a soft heart.
+     - $A7$	I am not really interested in others.$(R)$
+     - $A8$	I take time out for others.
+     - $A9$	I feel others' emotions.
+     - $A10$	I make people feel at ease.
+     
+   - $Conscientiousness$ 
+     - $C1$	I am always prepared.
+     - $C2$	I leave my belongings around.$(R)$
+     - $C3$	I pay attention to details.
+     - $C4$	I make a mess of things.$(R)$
+     - $C5$	I get chores done right away.
+     - $C6$	I often forget to put things back in their proper place.$(R)$
+     - $C7$	I like order.
+     - $C8$	I shirk my duties.$(R)$
+     - $C9$	I follow a schedule.
+     - $C10$	I am exacting in my work.
+   
+   - $Openness to experience$
+     - $O1$	I have a rich vocabulary.
+     - $O2$	I have difficulty understanding abstract ideas.$(R)$
+     - $O3$	I have a vivid imagination.
+     - $O4$	I am not interested in abstract ideas.$(R)$
+     - $O5$	I have excellent ideas.
+     - $O6$	I do not have a good imagination.
+     - $O7$	I am quick to understand things.
+     - $O8$	I use difficult words.
+     - $O9$	I spend time reflecting on things.
+     - $O10$	I am full of ideas.
+
+# ANALYSIS PLAN
+
+## Data cleaning
+
+Step 1: Plot the variables for checking extreme values 
+Usually the data collected online tends to have values which are extreme possibly due to typing errors or an ambiguity in instructions. 
+
+Following code will be used to look for columns which might have erroneously typed extreme values.
+```{r, eval = FALSE, include=TRUE, echo=TRUE}
+names(raw_data)
+raw_data %>% 
+  mutate_if(is.integer, as.numeric) %>% 
+  select_if(is.numeric) %>% 
+  gather() %>% 
+  ggplot(aes(value)) +
+    facet_wrap(~ key, scales = "free") +
+    geom_boxplot()+
+    theme_minimal()
+
+dim(raw_data)
+
+kable(describe(raw_data[,8:57])) #check min and max values for any outliers. Eevery variable is in the range of 0 to 5. 
+
+#final data to be used
+data = raw_data %>% 
+  dplyr::select(-c(race,engnat,hand,source)) %>%  #retain only those columns required for the analysis
+  filter(country == "US", age <= 80) #Use ONLY US cases, and age <= 80 years
+
+nrow(raw_data)
+nrow(data)
+
+names(data)
+```
+
+Cases with values beyond those in the coding system mentioned above for every item will be eliminated. Those cases with missing values will also be eliminated to keep the analysis simple. 
+
+## Research questions
+
+1. What is the structure of personality in this data?
+   - **Principal Component Analysis** 
+      + Parallel analysis to determine the number of factors. Previous studies have indicated PA leading to better estimates of factors to be extracted as compared to Kaiser's rule or the elbow method usually applied after plotting eigenvalues (Cattell's scree plot)
+      + A content comparison across two rotation methods- varimax and oblimin - will be discussed.
+      
+$paran$ package will be used for computing Parallel analysis, $psych$ and $GPArotation$ packages will be used for PCA. The number of iterations will be set to 1000.
+```{r, eval = FALSE, include=TRUE, echo=TRUE}
+## Parallel analysis
+paran(data[,4:53], iterations = 500, quietly = F, 
+    status = FALSE, all = FALSE, cfa = FALSE, graph = TRUE, color = TRUE, 
+    col = c("black", "orange", "skyblue"), lty = c(1, 2, 3), lwd = 1, legend = TRUE, 
+    file = "", width = 200, height = 200, grdevice = "png", seed = 0)
+
+screePlot(cov(data[,4:53]), method = "pa", n.obs=nrow(data), n.iter = 500)
+
+## PCA 
+   ##unrotated 
+unrt = principal(data[,4:53], nfactors = 50, rotate = "none", normalize = T)
+
+  ##Varimax rotation
+R.var = principal(data[,4:53], nfactors = 7, rotate = "varimax", normalize = T) #Kaiser normalization will be applied
+raw_var = fa.sort(R.var)
+df_var = data.frame(unclass(raw_var$loadings))
+df_var%>% 
+  kable()
+
+  ##Oblimin rotation
+R.ob = principal(data[,4:53], nfactors = 7, rotate = "oblimin", normalize = T)
+struc.mat =R.ob$loadings %*%R.ob$Phi #multiplying the pattern matrix with the covariance matrix from the rotated factors
+df_obl = fa.sort(struc.mat)#Interpreting the Structure matrix
+df_obl %>% 
+  kable()
+
+class(raw_obl)
+```      
+Pattern matrix for varimax rotation and structure matrix for oblimin rotation will be reported
+
+The amount of variance explained by the varimax and oblimin rotations will be compared. 
+
+
+   
+2. Does gender and country have an effect on the levels of Neuroticism, Extraversion, Openness to experience, Agreeableness, Conscientiousness (Only one or two of the dimensions will be explored)
+   - **Regression Analysis (ANOVA)**
+     + Two levels of gender - male and female - will be retained
+     + Two levels of country - country X and country Y - will be retained
+
+Models:
+
+ - $Neuroticism = gender + country + gender*country$
+ 
+```{r, eval = FALSE, include=TRUE, echo=TRUE}
+finaldata = finaldata %>% 
+  filter(gender == "male" | gender = "female") %>%  
+  filter(country == ""| country == "" )
+  
+finaldata %>%  
+  lm(N ~ gender*country) %>% 
+  summary()
+
+finaldata %>%  
+  ggplot(aes(x = "", y = ""), methods = "lm") 
+```
+$ggplot2$ package will be used for plotting the main and interation effects.
+
+ - $Extraversion = gender + country + gender*country$
+ 
+ - $Openness$ $to$ $experience = gender + country + gender*country$
+ 
+ - $Agreeableness = gender + country + gender*country$
+ 
+ - $Conscientiousness = gender + country + gender*country$
+
+
+
+
+
