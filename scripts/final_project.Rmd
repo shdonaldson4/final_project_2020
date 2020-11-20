@@ -12,16 +12,18 @@ author:
       - Conceptualization
       - Writing - Original Draft Preparation
       - Writing - Review & Editing
-  - name          : "Ernst-August Doelle"
-    affiliation   : "1,2"
+  - name          : "Xiayou Liu"
+    affiliation   : "1"
     role:
       - Writing - Review & Editing
-
+  - name          : "Sarah DDonaldson"
+    affiliation   : "1"
+    role:
+      - Writing - Review & Editing
 affiliation:
   - id            : "1"
-    institution   : "Wilhelm-Wundt-University"
-  - id            : "2"
-    institution   : "Konstanz Business School"
+    institution   : "University of Oregon"
+
 
 authornote: |
   Add complete departmental affiliations for each author here. Each new line herein must be indented, like this line.
@@ -29,23 +31,11 @@ authornote: |
   Enter author note here.
 
 abstract: |
-  One or two sentences providing a **basic introduction** to the field,  comprehensible to a scientist in any discipline.
-  
-  Two to three sentences of **more detailed background**, comprehensible  to scientists in related disciplines.
-  
-  One sentence clearly stating the **general problem** being addressed by  this particular study.
-  
-  One sentence summarizing the main result (with the words "**here we show**" or their equivalent).
-  
-  Two or three sentences explaining what the **main result** reveals in direct comparison to what was thought to be the case previously, or how the  main result adds to previous knowledge.
-  
-  One or two sentences to put the results into a more **general context**.
-  
-  Two or three sentences to provide a **broader perspective**, readily comprehensible to a scientist in any discipline.
+  Several studies have supported the replicability of the Big 5 model across cultures, languages and populations. This study looks at the factor structure of personality in the US sample. A parallel analysis suggested extracting 7 factors which were further subjected to a principal components analysis. Factors structures emerging from varimax and oblimin rotations were examined. 
   
   <!-- https://tinyurl.com/ybremelq -->
   
-keywords          : "keywords"
+keywords          : "Big 5, parallel analysis, varimax, oblimin"
 wordcount         : "X"
 
 bibliography      : ["r-references.bib"]
@@ -72,9 +62,12 @@ knitr::opts_chunk$set(
 	fig.width = 8,
 	message = FALSE,
 	errors = TRUE,
-	warnings = FALSE
+	warnings = FALSE,
+	message = FALSE
 )
 
+
+library(scales) 
 library(tidyverse)
 library(rio)
 library(here)
@@ -87,6 +80,8 @@ library(psych)
 library(factorAnalysis)
 library("papaja")
 library(xlsx)
+library(rstatix)
+library(ggpubr)
 r_refs("r-references.bib")
 
 raw_data = import(here("data", "data.csv"), setclass = "tbl_df")
@@ -99,22 +94,15 @@ knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
 ```
 
 
+# Introduction 
 
-# Methods
-We report how we determined our sample size, all data exclusions (if any), all manipulations, and all measures in the study. <!-- 21-word solution (Simmons, Nelson & Simonsohn, 2012; retrieved from http://ssrn.com/abstract=2160588) -->
+Big 5 personality structure has garnered support due to a strict extraction of five factors. This has limited the scope of how personality has been understood across cultures. There is a need to understand the emic structures over imposing etic structures on datasets.We need to focus on how we could add a more stringent way of unearthing personality models. A more robust model would be the one that emerges through emic methods rather than etic methods.   
 
-## Participants
 
-## Material
+```{r Data-cleaning, eval=TRUE, echo=TRUE, include=FALSE}
 
-## Procedure
-
-## Data analysis
-We used `r cite_r("r-references.bib")` for all our analyses.
-
-```{r Outliers check, eval=FALSE, echo=TRUE, include=FALSE}
-names(raw_data)
-raw_data %>% 
+#Look at all the variables in teh data
+h = raw_data %>% 
   mutate_if(is.integer, as.numeric) %>% 
   select_if(is.numeric) %>% 
   gather() %>% 
@@ -122,57 +110,200 @@ raw_data %>%
     facet_wrap(~ key, scales = "free") +
     geom_boxplot()+
     theme_minimal()
-
-
-
 dim(raw_data)
-
 
 #final data to be used
 data = raw_data %>% 
   dplyr::select(-c(race,engnat,hand,source)) %>%  #retain only those columns required for the analysis
-  filter(country=="US",age >18 & age<= 80) #Use ONLY US cases, and age between 18 and 80 years
+  filter(country == "US", age >=18 & age <= 80 ) %>%  #Use ONLY US cases, and age between 18 and 80 years
+  filter_if(is.numeric, all_vars((.) != 0)) %>%  #dropping all rows with missing values
+  mutate(gender = recode(gender, `1` = "Male", `2` = "Female", `3` = "Other")) %>% 
+  filter(gender != "Other") %>% #retain only males and females
+    rowwise() %>%
+  #score variables, r annoted are reverse scored items
+  mutate(E4r = (6-E4), 
+         E6r = (6-E6),
+         E8r = (6-E8),
+         E10r = (6-E10),
+         N2r = (6-N2),
+         N4r = (6-N4),
+         A1r = (6-A1),
+         A3r = (6-A3), 
+         A5r = (6-A5),
+         A7r = (6-A7),
+         C2r = (6-C2),
+         C4r = (6-C4),
+         C6r = (6-C6),
+         C8r = (6-C8),
+         O2r = (6-O2),
+         O4r = (6-O4)) %>% 
+ mutate(E = sum(E1, E2, E3,E4r, E5,E6r, E7, E8r, E9, E10r),
+  N = sum(N1, N2r, N3, N4r, N5, N5, N6, N7, N8, N9, N10),
+  A = sum(A1r, A2, A3r, A4, A5r, A6, A7r, A8, A9, A10),
+  C = sum(C1, C2r, C3, C4r, C5, C6r, C7, C8r, C9, C10),
+  O =sum(O1, O2r, O3, O4r, O5, O6, O7)
+ ) 
 
-describe(data)
+gender.count = data %>% 
+   group_by(gender) %>%
+ summarise(gender_count=n())
+
+gender.count[1,2]
+```
+
+```{r Descriptives, eval=TRUE, echo=TRUE, include=FALSE}
+MeanDF = data %>% 
+  dplyr::select(gender, E:O) %>% 
+  group_by(gender) %>% 
+  summarise(A = mean(A),
+            C = mean(C),
+            E = mean(E),
+            N = mean(N),
+            O = mean(O)) %>% 
+  pivot_longer(
+    cols = c(A:O),
+    names_to =c("variables"),
+    values_to = "values") %>% 
+  pivot_wider(names_from = gender, 
+    values_from = values)
+
+tDF = data %>% 
+  dplyr::select(E, N, A, C, O, gender) %>%
+  pivot_longer(-gender, names_to = "variables",  values_to = "value") %>% 
+  group_by(variables) %>%
+  t_test(value ~ gender) %>%
+  adjust_pvalue(method = "BH") %>%
+  add_significance()
 
   
+E.df = data %>% 
+  dplyr::select(E1, E2, E3,E4r, E5,E6r, E7, E8r, E9, E10r) %>% 
+ mutate_if(is.integer,as.numeric)
+
+N.df = data %>% 
+  dplyr::select(N1, N2r, N3, N4r, N5, N6, N7, N8, N9, N10) %>% 
+ mutate_if(is.integer,as.numeric)
+  
+A.df = data %>% 
+  dplyr::select(A1r, A2, A3r, A4, A5r, A6, A7r, A8, A9, A10) %>% 
+  mutate_if(is.integer,as.numeric)
+
+C.df = data %>% 
+  dplyr::select(C1, C2r, C3, C4r, C5, C6r, C7, C8r, C9, C10) %>% 
+  mutate_if(is.integer,as.numeric)
+
+O.df = data %>% 
+  dplyr::select(O1, O2r, O3, O4r, O5, O6, O7) %>% 
+  mutate_if(is.integer,as.numeric)
+
+aDF = c(E = psychometric::alpha(E.df),
+N = psychometric::alpha(N.df),
+A = psychometric::alpha(A.df),
+C = psychometric::alpha(C.df),
+O = psychometric::alpha(O.df))
+
+aDF = aDF %>% 
+       as.data.frame() %>% 
+       rownames_to_column(var = "variables") %>% 
+       dplyr::rename(alpha = ".") %>% 
+  as_tibble()
+  
+
+tDF = tDF %>% 
+  select(variables, statistic, p) 
 ```
 
-```{r Parallel Analysis, echo=FALSE, message=FALSE, warning=FALSE}
+```{r descriptiveTable, results = "asis"}
+table = dplyr::inner_join(MeanDF, tDF, by="variables") 
+dplyr::left_join(table, aDF, by="variables") %>%
+  dplyr::rename(t ="statistic") %>% 
+  apa_table(align = "c", caption = "Summary statistics", note = "E = Extraversion, N = Neuroticism, A = Agreeableness, C = Conscientiousness, O = Openness/Intellect, t = t statistic value, p =p values for corresponding t values, a = Chronbach's alpha" )
+```
 
-paran(data[,4:53], iterations = 500, quietly = F, 
-    status = FALSE, all = FALSE, cfa = FALSE, graph = TRUE, color = TRUE, 
-    col = c("black", "orange", "skyblue"), lty = c(1, 2, 3), lwd = 1, legend = TRUE,
-    file = "", width = 200, height = 200, grdevice = "png", seed = 0)
+# Methods
+
+## Procedure
+The dataset for the analysis was obtained from $Open-Source Psychometrics Project$ repository. This is the link to the website. [Open Source Psychometric project](https://openpsychometrics.org/_rawdata/).It contains data on the Big 5 personality variables $(Extraversion, Neuroticism, Agreeableness, Conscientiousness, Openness to Experience)$ and demographics $(race, age, gender, country)$. `r  nrow(data)` participants voluntarily responded to the questionnaires. We retained participants between the ages of 18 and 80, from United states of America. The former inclusion criterion was based on the strogheld assumption that personality develops at the age of 18. The latter was the primary inclusion criterion given the populatuion of investigation for the current study.  Participants (*Females* = `r printnum (gender.count[1,2])`,  *Males*= `r printnum (gender.count[2,2])`) in this study were between the ages, as mentioned previously, of 18 and 80 (*M* = `r printnum(mean(data$age))`, *SD* = `r printnum(sd(data$age))`). 
+
+## Data analysis
+We used `r cite_r("r-references.bib")` for all our analyses.  Items were reverse scored if needed and total scores were obtained on the Big 5 variables for every participant. We obtained descriptive statistics for all the Big five variables. We used Principal components analysis to study the factor structure of the present data. Parallel analysis was computed to determine the number of factors to be extracted. These factors were further rotated using varimax and oblimin rotations. 
+
+```{r errorbars, fig.cap = "Difference between Males and Females on Big 5 variables", echo = F, fig.height = 6.5, warning = F}
+fig.bg5 = data %>% 
+  dplyr::select(E, N, A, C, O, gender) %>% 
+  group_by(gender) %>% 
+  summarise_all(., .funs = c(mean, sd)) %>%   pivot_longer(cols = E_fn1:O_fn2,
+                names_to =c("var", "funs"),
+                names_pattern = "(.*)_(.*)",
+                values_to = "values",
+                ) %>% 
+  mutate_if(is.character, as.factor) %>% 
+  mutate(funs = recode(funs, 
+                       fn1 = "mean", 
+                       fn2 = "sd")) %>% 
+  pivot_wider(names_from = funs, 
+    values_from = values) %>% 
+  mutate(var = factor(var, levels=c("E", "N", "A", "C", "O"))) %>% 
+  ggplot(aes(x=var, color = gender))+
+  geom_errorbar(aes(ymin=mean - sd, ymax=mean+sd), width=.2,           position=position_dodge(.9))+
+  labs(x = "Big 5 variables",
+       y = "Values",
+       color = "Gender")+
+  jtools::theme_apa(remove.y.gridlines = FALSE, remove.x.gridlines = FALSE, legend.use.title = TRUE, legend.pos = "topright")
+
+fig.bg5
+```
+
+```{r PCA.data, eval=TRUE, echo=TRUE, include=FALSE}
+PCA.data = data %>% 
+  select(E1, E2, E3,E4r, E5,E6r, E7, E8r, E9, E10r,
+         N1, N2r, N3, N4r, N5, N5, N6, N7, N8, N9, N10,
+         A1r, A2, A3r, A4, A5r, A6, A7r, A8, A9, A10,
+         C1, C2r, C3, C4r, C5, C6r, C7, C8r, C9, C10,
+         O1, O2r, O3, O4r, O5, O6, O7)
 
 ```
 
-```{r Rotations, message=FALSE, warning=FALSE}
+
+```{r parallel-analysis, fig.cap = "Parallel analysis", echo = F, fig.height = 6.5, warning = F}
+
+factorAnalysis::screePlot(cor(PCA.data), method="pc", n.obs=nrow(PCA.data))
+
+```
+
+```{r Rotations, eval=TRUE, echo=TRUE, include=FALSE}
   ##Varimax rotation
-R.var = principal(data[,4:53], nfactors = 7, rotate = "varimax", normalize = T) #Kaiser normalization will be applied
+R.var = principal(PCA.data, nfactors = 7, rotate = "varimax", normalize = T) #Kaiser normalization will be applied
 raw_var = fa.sort(R.var)
 df_var = data.frame(unclass(raw_var$loadings))
-write.xlsx(df_var, file = "Rotation outputs.xlsx", row.names = TRUE, sheetName = "varimax", append = FALSE)
-
-
-df_var%>% 
-  kable()
+#write.xlsx(df_var, file = "Rotation outputs.xlsx", row.names = TRUE, sheetName = "varimax", append = FALSE)
 
   ##Oblimin rotation
-R.ob = principal(data[,4:53], nfactors = 7, rotate = "oblimin", normalize = T)
+R.ob = principal(PCA.data, nfactors = 7, rotate = "oblimin", normalize = T)
 struc.mat = R.ob$loadings %*%R.ob$Phi #multiplying the pattern matrix with the covariance matrix from the rotated factors
 df_obl = fa.sort(struc.mat)#Interpreting the Structure matrix
-write.xlsx(df_obl, file = "Rotation outputs.xlsx", row.names = TRUE, sheetName = "oblimin", append = TRUE)
+#write.xlsx(df_obl, file = "Rotation outputs.xlsx", row.names = TRUE, sheetName = "oblimin", append = TRUE)
+```
 
+```{r varimaxTable, results = "asis"}
+df_var%>% 
+  apa_table(align = "c", caption = "Varimax rotation loadings matrix", font_size = "tiny", note = "E = Extraversion, N = Neuroticism, A = Agreeableness, C = Conscientiousness, O = Openness/Intellect", added_stub_head = "Items")
+```
+
+```{r obliminTable, results = "asis"}
 df_obl %>% 
-  kable()
-
+  apa_table(align = "c", caption = "Oblimin rotation loadings matrix", font_size = "tiny", note = "E = Extraversion, N = Neuroticism, A = Agreeableness, C = Conscientiousness, O = Openness/Intellect", added_stub_head = "Items") 
 ```
 
 
 # Results
-Parallel analysis suggested 7 factors to be retained. Seven factor solution was rotated using varimax and oblimin rotations. 
+Table\ \@ref(tab:descriptiveTable) displays a summary of differences between males and females and Chronbach's alpha value for all Big 5 variables. There is a significant difference in all the variables for males and females except for Extraversion in this sample. We took a closer look at the error bars to see if there is any overlap. Figure\ \@ref(fig:errorbars) indicates a very high overlap for genders across Big 5 variables with an almost exact range for Extraversion. This indicates that there is not much difference in the levels of Big 5 in males and females in this sample. All the alpha values seem reasonably acceptable except for a low value for Openness. 
+Parallel analysis (Horn's method) suggested 7 factors to be retained as seen in Figure\ \@ref(fig:parallel-analysis). The seven factor solution was rotated using varimax and oblimin rotations. An examination of loadings matrix for varimax rotation Table\ \@ref(tab:varimaxTable) and structure matrix for oblimin rotation Table\ \@ref(tab:obliminTable)  indicate a clear emergence of the first three factors -Extraversion, Neuroticism, Agreeableness - indicating the respective items with highest loading on those factors. The last two factors - Conscientiousness and Openness - tend to split into multiple factors. 
+
 # Discussion
+
+Althought the t-test indicated significant differences overlaps seen in the errorbars indicate that no main differences can be seen in the plots. Openness and conscientiousness split into more factors which indicate a rather interesting groupings of variables into factors for this data. One could further look at inter item consistency values for these groups of 7 factors for the data. 
+
 
 
 \newpage
