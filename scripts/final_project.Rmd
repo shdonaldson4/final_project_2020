@@ -69,8 +69,8 @@ knitr::opts_chunk$set(
 	eval = T,
 	echo = FALSE,
 	fig.height = 7,
-	fig.width = 8,
-	message = FALSE,
+	fig.width = 8, #good job with global options. Our group hadn't talked about this yet, but we
+	message = FALSE, #will likely incorporate it into our own project.
 	errors = TRUE,
 	warnings = FALSE
 )
@@ -83,8 +83,8 @@ library(papaja)
 library(tinytex)
 library(knitr)
 library(paran)
-library(psych)
-library(factorAnalysis)
+library(psych)        #Never heard of paran, psych, or xlsx, though I'm guessing the last one is excel related
+library(factorAnalysis) #I was unable to knit this because it was not a package that was available for me to install. Said it wasn't available for my version and I'm pretty sure I'm up to date.
 library("papaja")
 library(xlsx)
 r_refs("r-references.bib")
@@ -94,7 +94,7 @@ raw_data = import(here("data", "data.csv"), setclass = "tbl_df")
 
 ```{r analysis-preferences}
 # Seed for random number generation
-set.seed(42)
+set.seed(42) # I'm not totally sure what this does, but I'll have to look it up.
 knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
 ```
 
@@ -112,18 +112,18 @@ We report how we determined our sample size, all data exclusions (if any), all m
 ## Data analysis
 We used `r cite_r("r-references.bib")` for all our analyses.
 
-```{r Outliers check, eval=FALSE, echo=TRUE, include=FALSE}
+```{r Outliers check, eval=FALSE, echo=TRUE, include=FALSE} 
 names(raw_data)
 raw_data %>% 
-  mutate_if(is.integer, as.numeric) %>% 
-  select_if(is.numeric) %>% 
+  mutate_if(is.integer, as.numeric) %>% #never seen several of these functions
+  select_if(is.numeric) %>%             #is.integer, as.numeric, mutate_if(), gather()
   gather() %>% 
   ggplot(aes(value)) +
     facet_wrap(~ key, scales = "free") +
     geom_boxplot()+
     theme_minimal()
 
-
+# This is a great chunk of code. Very nice.
 
 dim(raw_data)
 
