@@ -23,27 +23,9 @@ affiliation:
   - id            : "2"
     institution   : "Konstanz Business School"
 
-authornote: |
-  Add complete departmental affiliations for each author here. Each new line herein must be indented, like this line.
+authornote: 
 
-  Enter author note here.
-
-abstract: |
-  One or two sentences providing a **basic introduction** to the field,  comprehensible to a scientist in any discipline.
-  
-  Two to three sentences of **more detailed background**, comprehensible  to scientists in related disciplines.
-  
-  One sentence clearly stating the **general problem** being addressed by  this particular study.
-  
-  One sentence summarizing the main result (with the words "**here we show**" or their equivalent).
-  
-  Two or three sentences explaining what the **main result** reveals in direct comparison to what was thought to be the case previously, or how the  main result adds to previous knowledge.
-  
-  One or two sentences to put the results into a more **general context**.
-  
-  Two or three sentences to provide a **broader perspective**, readily comprehensible to a scientist in any discipline.
-  
-  <!-- https://tinyurl.com/ybremelq -->
+abstract:
   
 keywords          : "keywords"
 wordcount         : "X"
@@ -62,6 +44,8 @@ documentclass     : "apa6"
 classoption       : "man"
 output            : papaja::apa6_pdf
 ---
+
+<!-- You have an eye-catching title, which immediately grabbed my attention. The topic feels relevant and certainly garnered my interest, despite the fact that I'm not a psychologist or psychology researcher. I did remove some of the extraneous text that pre-loaded with the papaja APA template, just to clean the overall visual. -->
 
 ```{r setup, include = FALSE}
 options(Encoding="UTF-8")
@@ -84,12 +68,14 @@ library(tinytex)
 library(knitr)
 library(paran)
 library(psych)
-library(factorAnalysis)
 library("papaja")
 library(xlsx)
 r_refs("r-references.bib")
 
 raw_data = import(here("data", "data.csv"), setclass = "tbl_df")
+
+# You have several packages installed that I'm not familiar with, which is incredibly impressive, particularly paran and xlsx. I'm excited to learn more about their functions as I proceed. I did have to remove one library, as I was unable to download the package (factorAnalysis), which isn't compatible with my version of R.
+
 ```
 
 ```{r analysis-preferences}
@@ -97,8 +83,6 @@ raw_data = import(here("data", "data.csv"), setclass = "tbl_df")
 set.seed(42)
 knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
 ```
-
-
 
 # Methods
 We report how we determined our sample size, all data exclusions (if any), all manipulations, and all measures in the study. <!-- 21-word solution (Simmons, Nelson & Simonsohn, 2012; retrieved from http://ssrn.com/abstract=2160588) -->
@@ -113,6 +97,10 @@ We report how we determined our sample size, all data exclusions (if any), all m
 We used `r cite_r("r-references.bib")` for all our analyses.
 
 ```{r Outliers check, eval=FALSE, echo=TRUE, include=FALSE}
+str(raw_data)
+
+# I added this code to view a summary string of the raw data and associated variables prior to reading through your data modifications.
+
 names(raw_data)
 raw_data %>% 
   mutate_if(is.integer, as.numeric) %>% 
@@ -123,19 +111,23 @@ raw_data %>%
     geom_boxplot()+
     theme_minimal()
 
+# Really impressed by your utilization of mutate_if and select_if as a method of transitioning from integers to numeric values. I was not aware of how to maximize the mutate and select functions with the addition of _if. This served as a clear demonstration of those functions.
 
+# I don't recall reviewing the gather function in class, so this is really interesting to see. After running the data, it seems as though it may serve a similar purpose as the pivot functions. I wonder if you were to use the pivot_longer and pivot_wider functions, if that would produce similar modifications?
 
 dim(raw_data)
-
 
 #final data to be used
 data = raw_data %>% 
   dplyr::select(-c(race,engnat,hand,source)) %>%  #retain only those columns required for the analysis
-  filter(country=="US",age >18 & age<= 80) #Use ONLY US cases, and age between 18 and 80 years
+  filter(country=="US",age >18 & age<= 80)#Use ONLY US cases, and age between 18 and 80 years
 
 describe(data)
 
-  
+# Was really cool to see how you used dplyr::select to call a library to a function to isolate specific columns you want to exclude from the data set.
+
+# Great use of filter to to sort the data by age ranges, it's such simple and clean code. Initially, I would have thought to use the "or" function (|) as opposed to the "and" function (&), but this makes much more sense and effectively narrowed your data set by the specified age ranges.
+
 ```
 
 ```{r Parallel Analysis, echo=FALSE, message=FALSE, warning=FALSE}
@@ -144,6 +136,8 @@ paran(data[,4:53], iterations = 500, quietly = F,
     status = FALSE, all = FALSE, cfa = FALSE, graph = TRUE, color = TRUE, 
     col = c("black", "orange", "skyblue"), lty = c(1, 2, 3), lwd = 1, legend = TRUE,
     file = "", width = 200, height = 200, grdevice = "png", seed = 0)
+
+# Thank you for demonstrating the paran package to plot data, it's very cool! It's always helpful to learn about alternative methods of plotting graphical information. Since we used ggplot as the primary tool for plotting in class, I wonder if there's a way to replicate this graph using ggplot.
 
 ```
 
@@ -158,6 +152,8 @@ write.xlsx(df_var, file = "Rotation outputs.xlsx", row.names = TRUE, sheetName =
 df_var%>% 
   kable()
 
+# After running this portion of the code chunk and viewing the subsequent table, I was thinking it might be helpful to shrink the data to a rounded number in order to consolidate space and increase the clarity of the visual presentation of the data.
+
   ##Oblimin rotation
 R.ob = principal(data[,4:53], nfactors = 7, rotate = "oblimin", normalize = T)
 struc.mat = R.ob$loadings %*%R.ob$Phi #multiplying the pattern matrix with the covariance matrix from the rotated factors
@@ -167,8 +163,9 @@ write.xlsx(df_obl, file = "Rotation outputs.xlsx", row.names = TRUE, sheetName =
 df_obl %>% 
   kable()
 
-```
+# Once again, impressed by your coding! I don't even think I have the capacity to wrap my head around this code chuck. Wanted to let you know that I was unable to run the code chunk in its entirety, which I assumed was due to my inability to download and load the factorAnalysis library, but the error I receive states that there is no package called 'GPArotation'. I was unable to problem solve that on my own, but hopefully having that information will be helpful to you. Overall, you seem to have a wonderful grasp of R and its capabilities, which is truly inspiring to me as a new user. This exercise has expanded my understanding and knowledge of what R is capable of executing. 
 
+```
 
 # Results
 Parallel analysis suggested 7 factors to be retained. Seven factor solution was rotated using varimax and oblimin rotations. 
