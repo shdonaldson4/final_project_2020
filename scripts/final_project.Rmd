@@ -16,7 +16,7 @@ author:
     affiliation   : "1"
     role:
       - Writing - Review & Editing
-  - name          : "Sarah DDonaldson"
+  - name          : "Sarah Donaldson"
     affiliation   : "1"
     role:
       - Writing - Review & Editing
@@ -77,9 +77,9 @@ library(tinytex)
 library(knitr)
 library(paran)
 library(psych)
-library(factorAnalysis)
+#library(factorAnalysis)
 library("papaja")
-library(xlsx)
+#library(xlsx)
 library(rstatix)
 library(ggpubr)
 r_refs("r-references.bib")
@@ -271,6 +271,8 @@ factorAnalysis::screePlot(cor(PCA.data), method="pc", n.obs=nrow(PCA.data))
 
 ```
 
+
+
 ```{r Rotations, eval=TRUE, echo=TRUE, include=FALSE}
   ##Varimax rotation
 R.var = principal(PCA.data, nfactors = 7, rotate = "varimax", normalize = T) #Kaiser normalization will be applied
@@ -295,6 +297,22 @@ df_obl %>%
   apa_table(align = "c", caption = "Oblimin rotation loadings matrix", font_size = "tiny", note = "E = Extraversion, N = Neuroticism, A = Agreeableness, C = Conscientiousness, O = Openness/Intellect", added_stub_head = "Items") 
 ```
 
+```{r regression, eval=TRUE, echo=TRUE, include=FALSE}
+#final data to be used
+anova_data = raw_data %>% 
+  dplyr::select(-c(race,engnat,hand,source)) %>%  #retain only those columns required for the analysis
+  mutate(country = as.factor(country)) 
+
+summary(anova_data$country) # finding two equal size group of countries
+
+anova_data = anova_data %>%
+  filter(country == "GB" | country == "IN", age >=18 & age <= 80 ) %>%  #Use ONLY US cases, and age between 18 and 80 years
+  filter_if(is.numeric, all_vars((.) != 0)) %>%  #dropping all rows with missing values
+  mutate(gender = recode(gender, `1` = "Male", `2` = "Female", `3` = "Other")) %>% 
+  filter(gender != "Other")  %>% #retain only males and females 
+  select(c(age,country,gender,O1:O10)) %>%
+  mutate()   # summarize Os for each person and pivot_longer
+```
 
 # Results
 Table\ \@ref(tab:descriptiveTable) displays a summary of differences between males and females and Chronbach's alpha value for all Big 5 variables. There is a significant difference in all the variables for males and females except for Extraversion in this sample. We took a closer look at the error bars to see if there is any overlap. Figure\ \@ref(fig:errorbars) indicates a very high overlap for genders across Big 5 variables with an almost exact range for Extraversion. This indicates that there is not much difference in the levels of Big 5 in males and females in this sample. All the alpha values seem reasonably acceptable except for a low value for Openness. 
