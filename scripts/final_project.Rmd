@@ -297,21 +297,73 @@ df_obl %>%
   apa_table(align = "c", caption = "Oblimin rotation loadings matrix", font_size = "tiny", note = "E = Extraversion, N = Neuroticism, A = Agreeableness, C = Conscientiousness, O = Openness/Intellect", added_stub_head = "Items") 
 ```
 
+## Today's HW
+
 ```{r regression, eval=TRUE, echo=TRUE, include=FALSE}
-#final data to be used
-anova_data = raw_data %>% 
+anova_data_wide = raw_data %>% 
   dplyr::select(-c(race,engnat,hand,source)) %>%  #retain only those columns required for the analysis
-  mutate(country = as.factor(country)) 
-
-summary(anova_data$country) # finding two equal size group of countries
-
-anova_data = anova_data %>%
-  filter(country == "GB" | country == "IN", age >=18 & age <= 80 ) %>%  #Use ONLY US cases, and age between 18 and 80 years
+  mutate(country = as.factor(country)) %>%
+  filter(country == "GB" | country == "IN", age >=18 & age <= 80 ) %>%  #Use ONLY Great Britain and India cases, and age between 18 and 80 years
   filter_if(is.numeric, all_vars((.) != 0)) %>%  #dropping all rows with missing values
   mutate(gender = recode(gender, `1` = "Male", `2` = "Female", `3` = "Other")) %>% 
-  filter(gender != "Other")  %>% #retain only males and females 
-  select(c(age,country,gender,O1:O10)) %>%
-  mutate()   # summarize Os for each person and pivot_longer
+  filter(gender != "Other") %>% #retain only males and females
+  select(c(age,country,gender,O1:O10, E1:E10)) %>%
+  rowwise() %>%
+  #score variables, r annoted are reverse scored items
+  mutate(E4r = (6-E4), 
+         E6r = (6-E6),
+         E8r = (6-E8),
+         E10r = (6-E10),
+         O2r = (6-O2),
+         O4r = (6-O4)) %>% 
+ mutate(E = sum(E1, E2, E3,E4r, E5,E6r, E7, E8r, E9, E10r),
+  O =sum(O1, O2r, O3, O4r, O5, O6, O7)) %>%
+  select(age,country,gender, E, O) 
+
+
+# descrptives
+anova_data_wide%>%
+  pivot_longer(
+    cols = c(O, E),
+    names_to =  "personality",
+    values_to = "values"
+  ) %>%
+  ggplot(aes(x = values, fill = personality)) +
+  geom_histogram() +
+  facet_wrap(~personality + country)
+
+# Anova: 
+
+anovaR <- aov(O ~ country + gender, data = anova_data_wide)
+summary(anovaR)
+
+# figures
+ggplot(anova_data_wide, aes(x = country, y = O, color = gender)) + 
+  geom_boxplot()
+
+
+# 
+# #final data to be used
+# anova_data = raw_data %>% 
+#   dplyr::select(-c(race,engnat,hand,source)) %>%  #retain only those columns required for the analysis
+#   mutate(country = as.factor(country)) 
+# 
+# summary(anova_data$country) # finding two equal size group of countries
+# 
+# anova_data_clean = anova_data %>%
+#   filter(country == "GB" | country == "IN", age >=18 & age <= 80 ) %>%  #Use ONLY US cases, and age between 18 and 80 years
+#   filter_if(is.numeric, all_vars((.) != 0)) %>%  #dropping all rows with missing values
+#   mutate(gender = recode(gender, `1` = "Male", `2` = "Female", `3` = "Other")) %>% 
+#   filter(gender != "Other")  %>% #retain only males and females 
+#   select(c(age,country,gender,O1:O10, E1:E10)) %>%
+#   pivot_longer(
+#     cols = c(O1:O10),c(E1:E10)
+#     names_to =  "variables",
+#     values_to = "values"
+#   )  
+#   # pivot_wider(names_from = "varaibles",
+#   #             values_to = "values")# summarize Os for each person and pivot_longer
+
 ```
 
 # Results
