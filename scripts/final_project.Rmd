@@ -90,12 +90,6 @@ r_refs("r-references.bib")
 raw_data = import(here("data", "data.csv"), setclass = "tbl_df")
 ```
 
-```{r analysis-preferences}
-# Seed for random number generation
-set.seed(42)
-knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
-```
-
 
 # Introduction 
 
