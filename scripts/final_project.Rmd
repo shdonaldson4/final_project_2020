@@ -80,12 +80,17 @@ library(tinytex)
 library(knitr)
 library(paran)
 library(psych)
-#library(factorAnalysis)
+if(!require(devtools)){
+   install.packages("devtools")
+}
+devtools::install_github("rkabacoff/factorAnalysis") #Not on cran
 library("papaja")
 #library(xlsx)
 library(rstatix)
 library(ggpubr)
 r_refs("r-references.bib")
+
+
 
 raw_data = import(here("data", "data.csv"), setclass = "tbl_df")
 ```
