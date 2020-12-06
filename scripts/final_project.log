@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.12.6)  6 DEC 2020 10:13
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.12.6)  6 DEC 2020 11:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -10,7 +10,16 @@ TinyTeX/texmf-dist/tex/latex/apa6/apa6.cls
 Document Class: apa6 2020/01/13 v2.34 APA formatting (6th edition)
 (/Users/sdonalds/Library/TinyTeX/texmf-dist/tex/latex/base/article.cls
 Document Class: article 2020/04/10 v1.4m Standard LaTeX document class
-(/Users/sdonalds/Library/TinyTeX/texmf-dist/tex/latex/base/size12.clo
+(/Users/sdonalds/Library/TinyTeX/texmf-dist/tex/latex/base/fleqn.clo
+File: fleqn.clo 2016/12/29 v1.2b Standard LaTeX option (flush left equations)
+\mathindent=\skip47
+Applying: [2015/01/01] Make \[ robust on input line 50.
+LaTeX Info: Redefining \[ on input line 51.
+Already applied: [0000/00/00] Make \[ robust on input line 62.
+Applying: [2015/01/01] Make \] robust on input line 74.
+LaTeX Info: Redefining \] on input line 75.
+Already applied: [0000/00/00] Make \] robust on input line 83.
+) (/Users/sdonalds/Library/TinyTeX/texmf-dist/tex/latex/base/size12.clo
 File: size12.clo 2020/04/10 v1.4m Standard LaTeX file (size option)
 )
 \c@part=\count177
@@ -21,8 +30,8 @@ File: size12.clo 2020/04/10 v1.4m Standard LaTeX file (size option)
 \c@subparagraph=\count182
 \c@figure=\count183
 \c@table=\count184
-\abovecaptionskip=\skip47
-\belowcaptionskip=\skip48
+\abovecaptionskip=\skip48
+\belowcaptionskip=\skip49
 \bibindent=\dimen138
 ) (/Users/sdonalds/Library/TinyTeX/texmf-dist/tex/latex/etoolbox/etoolbox.sty
 Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
@@ -133,16 +142,16 @@ able.sty
 Package: threeparttable 2003/06/13  v 3.0
 \@tempboxb=\box47
 )
-\b@level@one@skip=\skip49
-\e@level@one@skip=\skip50
-\b@level@two@skip=\skip51
-\e@level@two@skip=\skip52
-\b@level@three@skip=\skip53
-\e@level@three@skip=\skip54
-\b@level@four@skip=\skip55
-\e@level@four@skip=\skip56
-\b@level@five@skip=\skip57
-\e@level@five@skip=\skip58
+\b@level@one@skip=\skip50
+\e@level@one@skip=\skip51
+\b@level@two@skip=\skip52
+\e@level@two@skip=\skip53
+\b@level@three@skip=\skip54
+\e@level@three@skip=\skip55
+\b@level@four@skip=\skip56
+\e@level@four@skip=\skip57
+\b@level@five@skip=\skip58
+\e@level@five@skip=\skip59
 (/Users/sdonalds/Library/TinyTeX/texmf-dist/tex/latex/caption/caption.sty
 Package: caption 2020/10/26 v3.5g Customizing captions (AR)
 (/Users/sdonalds/Library/TinyTeX/texmf-dist/tex/latex/caption/caption3.sty
@@ -161,10 +170,10 @@ Package caption Info: Standard document class detected.
 Package caption Info: threeparttable package is loaded.
 )
 \c@APAenum=\count195
-\@text@par@indent=\skip59
+\@text@par@indent=\skip60
 \gr@box=\box48
-\gr@boxwidth=\skip60
-\gr@boxheight=\skip61
+\gr@boxwidth=\skip61
+\gr@boxheight=\skip62
 (/Users/sdonalds/Library/TinyTeX/texmf-dist/tex/latex/tools/bm.sty
 Package: bm 2019/07/24 v1.2d Bold Symbol Support (DPC/FMi)
 \symboldoperators=\mathgroup4
@@ -177,15 +186,15 @@ LaTeX Info: Redefining \bm on input line 209.
 (/Users/sdonalds/Library/TinyTeX/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
 Package: fancyhdr 2019/01/31 v3.10 Extensive control of page headers and footer
 s
-\f@nch@headwidth=\skip62
-\f@nch@O@elh=\skip63
-\f@nch@O@erh=\skip64
-\f@nch@O@olh=\skip65
-\f@nch@O@orh=\skip66
-\f@nch@O@elf=\skip67
-\f@nch@O@erf=\skip68
-\f@nch@O@olf=\skip69
-\f@nch@O@orf=\skip70
+\f@nch@headwidth=\skip63
+\f@nch@O@elh=\skip64
+\f@nch@O@erh=\skip65
+\f@nch@O@olh=\skip66
+\f@nch@O@orh=\skip67
+\f@nch@O@elf=\skip68
+\f@nch@O@erf=\skip69
+\f@nch@O@olf=\skip70
+\f@nch@O@orf=\skip71
 ) (/Users/sdonalds/Library/TinyTeX/texmf-dist/tex/latex/endfloat/endfloat.sty
 Package: endfloat 2019/04/15 v2.7 LaTeX2e package puts figures and tables at en
 d (jdm)
@@ -207,7 +216,7 @@ LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 )) (/Users/sdonalds/Library/TinyTeX/texmf-dist/tex/latex/amsmath/amsmath.sty
 Package: amsmath 2020/09/23 v2.17i AMS math features
-\@mathmargin=\skip71
+\@mathmargin=\skip72
 For additional information on amsmath, use the `?' option.
 (/Users/sdonalds/Library/TinyTeX/texmf-dist/tex/latex/amsmath/amstext.sty
 Package: amstext 2000/06/29 v2.01 AMS text
@@ -254,8 +263,8 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
 \totwidth@=\dimen176
 \lineht@=\dimen177
 \@envbody=\toks21
-\multlinegap=\skip72
-\multlinetaggap=\skip73
+\multlinegap=\skip73
+\multlinetaggap=\skip74
 \mathdisplay@stack=\toks22
 LaTeX Info: Redefining \[ on input line 2923.
 LaTeX Info: Redefining \] on input line 2924.
@@ -407,7 +416,7 @@ Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 86.
 )
-\Hy@SectionHShift=\skip74
+\Hy@SectionHShift=\skip75
 ) (/Users/sdonalds/Library/TinyTeX/texmf-dist/tex/latex/grffile/grffile.sty
 Package: grffile 2019/11/11 v2.1 Extended file name support for graphics (legac
 y)
@@ -421,10 +430,10 @@ LaTeX Font Info:    Overwriting symbol font `ugrf@m' in version `bold'
 (Font)                  U/eur/m/n --> U/eur/b/n on input line 38.
 ) (/Users/sdonalds/Library/TinyTeX/texmf-dist/tex/latex/tools/longtable.sty
 Package: longtable 2020/01/07 v4.13 Multi-page Table package (DPC)
-\LTleft=\skip75
-\LTright=\skip76
-\LTpre=\skip77
-\LTpost=\skip78
+\LTleft=\skip76
+\LTright=\skip77
+\LTpre=\skip78
+\LTpost=\skip79
 \LTchunksize=\count289
 \LTcapwidth=\dimen182
 \LT@head=\box51
@@ -440,9 +449,9 @@ Package: longtable 2020/01/07 v4.13 Multi-page Table package (DPC)
 Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
 ) (/Users/sdonalds/Library/TinyTeX/texmf-dist/tex/latex/multirow/multirow.sty
 Package: multirow 2019/05/31 v2.5 Span multiple rows of a table
-\multirow@colwidth=\skip79
+\multirow@colwidth=\skip80
 \multirow@cntb=\count294
-\multirow@dima=\skip80
+\multirow@dima=\skip81
 \bigstrutjot=\dimen183
 ) (/Users/sdonalds/Library/TinyTeX/texmf-dist/tex/latex/tools/tabularx.sty
 Package: tabularx 2020/01/15 v2.11c `tabularx' package (DPC)
@@ -452,8 +461,8 @@ Package: array 2020/10/01 v2.5c Tabular extension package (FMi)
 \ar@mcellbox=\box55
 \extrarowheight=\dimen185
 \NC@list=\toks26
-\extratabsurround=\skip81
-\backup@length=\skip82
+\extratabsurround=\skip82
+\backup@length=\skip83
 \ar@cellbox=\box56
 )
 \TX@col@width=\dimen186
@@ -473,9 +482,9 @@ Package: environ 2014/05/04 v0.3 A new way to define environments
 (/Users/sdonalds/Library/TinyTeX/texmf-dist/tex/latex/trimspaces/trimspaces.sty
 Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
 ))
-\TPTL@width=\skip83
+\TPTL@width=\skip84
 )
-\longtablewidth=\skip84
+\longtablewidth=\skip85
 (/Users/sdonalds/Library/TinyTeX/texmf-dist/tex/latex/csquotes/csquotes.sty
 Package: csquotes 2019-12-06 v5.2j context-sensitive quotations (JAW)
 \csq@reset=\count296
@@ -540,24 +549,24 @@ File: l3backend-pdftex.def 2020-09-24 L3 backend support: PDF output (pdfTeX)
 ) (./final_project.aux)
 \openout1 = `final_project.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 153.
-LaTeX Font Info:    ... okay on input line 153.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 153.
-LaTeX Font Info:    ... okay on input line 153.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 153.
-LaTeX Font Info:    ... okay on input line 153.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 153.
-LaTeX Font Info:    ... okay on input line 153.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 153.
-LaTeX Font Info:    ... okay on input line 153.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 153.
-LaTeX Font Info:    ... okay on input line 153.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 153.
-LaTeX Font Info:    ... okay on input line 153.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 153.
-LaTeX Font Info:    ... okay on input line 153.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 153.
-LaTeX Font Info:    ... okay on input line 153.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 155.
+LaTeX Font Info:    ... okay on input line 155.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 155.
+LaTeX Font Info:    ... okay on input line 155.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 155.
+LaTeX Font Info:    ... okay on input line 155.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 155.
+LaTeX Font Info:    ... okay on input line 155.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 155.
+LaTeX Font Info:    ... okay on input line 155.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 155.
+LaTeX Font Info:    ... okay on input line 155.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 155.
+LaTeX Font Info:    ... okay on input line 155.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 155.
+LaTeX Font Info:    ... okay on input line 155.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 155.
+LaTeX Font Info:    ... okay on input line 155.
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -622,7 +631,7 @@ Package caption Info: longtable package is loaded.
 Package: ltcaption 2020/05/30 v1.4b longtable captions (AR)
 )
 Package caption Info: End \AtBeginDocument code.
-Package hyperref Info: Link coloring OFF on input line 153.
+Package hyperref Info: Link coloring OFF on input line 155.
 (/Users/sdonalds/Library/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
 (/Users/sdonalds/Library/TinyTeX/texmf-dist/tex/latex/refcount/refcount.sty
@@ -634,45 +643,45 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count306
 )
-LaTeX Info: Redefining \ref on input line 153.
-LaTeX Info: Redefining \pageref on input line 153.
-LaTeX Info: Redefining \nameref on input line 153.
+LaTeX Info: Redefining \ref on input line 155.
+LaTeX Info: Redefining \pageref on input line 155.
+LaTeX Info: Redefining \nameref on input line 155.
 (./final_project.out) (./final_project.out)
 \@outlinefile=\write6
 \openout6 = `final_project.out'.
 
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 1
-55.
+57.
 (/Users/sdonalds/Library/TinyTeX/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 1
-55.
+57.
 (/Users/sdonalds/Library/TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-155.
+157.
 (/Users/sdonalds/Library/TinyTeX/texmf-dist/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-155.
+157.
 (/Users/sdonalds/Library/TinyTeX/texmf-dist/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <12> on input line 155.
+(Font)              <12> on input line 157.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 155.
+(Font)              <8> on input line 157.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 155.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 155
+(Font)              <6> on input line 157.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 157
 .
 (/Users/sdonalds/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 155
+LaTeX Font Info:    Trying to load font information for U+msb on input line 157
 .
 (/Users/sdonalds/Library/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -682,32 +691,30 @@ ap}
 ] [2] [3]
 \openout3 = `final_project.ttt'.
 
-(final_project.ttt) [4] [5]
+(final_project.ttt) [4]
 \openout4 = `final_project.fff'.
 
 (final_project.fff)
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 2
-16.
+17.
 (/Users/sdonalds/Library/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
-<final_project_files/figure-latex/interaction_plot-1.pdf, id=62, 578.16pt x 505
+) [5]
+<final_project_files/figure-latex/interaction_plot-1.pdf, id=63, 578.16pt x 505
 .89pt>
 File: final_project_files/figure-latex/interaction_plot-1.pdf Graphic file (typ
 e pdf)
 <use final_project_files/figure-latex/interaction_plot-1.pdf>
 Package pdftex.def Info: final_project_files/figure-latex/interaction_plot-1.pd
-f  used on input line 445.
+f  used on input line 446.
 (pdftex.def)             Requested size: 469.75385pt x 411.0346pt.
 
-Overfull \hbox (28.90637pt too wide) in paragraph at lines 445--448
+Overfull \hbox (28.90637pt too wide) in paragraph at lines 446--452
 [][] 
  []
 
-[6 <./final_project_files/figure-latex/interaction_plot-1.pdf>]
-Underfull \vbox (badness 3977) has occurred while \output is active []
-
-[7] [8] [9] [10] [11]
+[6 <./final_project_files/figure-latex/interaction_plot-1.pdf>] [7] [8] [9] [10
+] [11]
 
 Package endnotes Warning: No endnotes found (file final_project.ent does not ex
 ist)
@@ -765,13 +772,13 @@ Package rerunfilecheck Info: File `final_project.out' has not changed.
 (rerunfilecheck)             Checksum: 505C9232B4F432E02361A2645843FF23;592.
  ) 
 Here is how much of TeX's memory you used:
- 14730 strings out of 481331
- 218849 string characters out of 5916839
- 587128 words of memory out of 5000000
- 31209 multiletter control sequences out of 15000+600000
+ 14744 strings out of 481331
+ 219141 string characters out of 5916839
+ 587953 words of memory out of 5000000
+ 31217 multiletter control sequences out of 15000+600000
  467714 words of font info for 75 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 80i,13n,85p,2252b,608s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 80i,13n,85p,2252b,606s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/Users/sdonalds/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}
 {/Users/sdonalds/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/
 Users/sdonalds/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/Users/
@@ -785,7 +792,7 @@ yTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb></Users/sdonalds/Library/TinyTeX
 /texmf-dist/fonts/type1/public/lm/lmri12.pfb></Users/sdonalds/Library/TinyTeX/t
 exmf-dist/fonts/type1/public/lm/lmsy10.pfb></Users/sdonalds/Library/TinyTeX/tex
 mf-dist/fonts/type1/public/lm/lmtt12.pfb>
-Output written on final_project.pdf (20 pages, 223034 bytes).
+Output written on final_project.pdf (20 pages, 224670 bytes).
 PDF statistics:
  303 PDF objects out of 1000 (max. 8388607)
  259 compressed objects within 3 object streams
