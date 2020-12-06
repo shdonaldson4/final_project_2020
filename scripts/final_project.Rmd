@@ -89,11 +89,13 @@ library("papaja")
 #library(xlsx)
 library(rstatix)
 if(!require(GPArotation)){
-   install.packages("devtools")}
+   install.packages("GPArotation")}
 library(ggpubr)
 library(GPArotation)
-r_refs("r-references.bib")
+#library(kableExtra)
 
+
+r_refs("r-references.bib")
 
 raw_data = import(here("data", "data.csv"), setclass = "tbl_df")
 ```
@@ -104,17 +106,21 @@ raw_data = import(here("data", "data.csv"), setclass = "tbl_df")
 <!-- Please explain emic vs etic structures -->
 The Five Factor Model of personality structure (FFM) proposes that personality can be divided into five unique facets: Extraversion, Openness to Experience, Agreeableness, Conscientiousness, and Neuroticism. Typically, the Big Five Personality Inventory [BFI; @john1991]  has garnered support due to a strict extraction of these five factors. However, this has limited the scope of how personality has been understood across cultures. There is a need to understand the emic structures over imposing etic structures on datasets. We need to focus on how we could add a more stringent way of unearthing personality models. A more robust model would be the one that emerges through emic methods rather than etic methods. Using a large, open-source dataset, we will investigate whether the FFM remains true for U.S. participants. As an exploratory analysis, there is no prediction as to the number of factors that may emerge.
 
-The comparison of personality factors between genders and countries is important to our understanding of general human variation [@weisberg2011]. Most gender comparisons report women scoring higher than men in extraversion [@goodwin2004; @weisberg2011]. However most of this work has been done in white, U.S. samples, and when @lynn1997 collected a large, cross-cultural dataset, men were found to display higher levels of extraversion compared to women in 30 out of 37 countries examined [@lynn1997]. In only 5 countries (including the United States, Mexico, France, Austria, and Japan) women scored significantly higher than men [@lynn1997], showing the importance of regional differences in gender-based personality comparisons. 
+The comparison of personality factors between genders and countries is important to our understanding of general human variation [@weisberg2011]. The trait of openness to experience (OE) reflects imagination, creativity, intellectual curiosity, and an appreciation for new, complex, aesthetic experiences [@weisberg2011]. Gender comparisons on this trait are mixed world-wide. As an overall factor, very few gender differences are found [baer2008; @costa2001; @silva2010]. It is only when this factor is broken down into sub-categories that gender differences emerge. For example, men tend to score higher on openness to ideas, while women have been found to score higher than men on openness to aesthetics and feelings [@costa2001; @weisberg2011]. Further, the extent of gender differences in openness differs by country, with larger differences found in countries with more traditional male and female gender roles, such as in eastern cultures [@costa2001]. Therefore, comparing personality differences by gender and country can identify important cultural distinctions on typical gender stereotypes.
 
-The trait of openness to experience (OE) reflects imagination, creativity, intellectual curiosity, and an appreciation for new, complex, aesthetic experiences [@weisberg2011]. Gender comparisons on this trait are mixed world-wide. As an overall factor, very few gender differences are found [baer2008; @costa2001; @silva2010]. It is only when this factor is broken down into sub-categories that gender differences emerge. For example, men tend to score higher on openness to ideas, while women have been found to score higher than men on openness to aesthetics and feelings [@costa2001; @weisberg2011]. Further, the extent of gender differences in openness differs by country, with larger differences found in countries with more traditional male and female gender roles, such as in eastern cultures [@costa2001]. Therefore, comparing personality differences by gender and country can identify important cultural distinctions on typical gender stereotypes.
+This study investigated gender differences by country, comparing Great Britain (including England, Whales, and Scotland, but not Northern Ireland) to India. These countries are compared because they are represented in roughly even numbers in this dataset, and because of their cultural differences in gender stereotypes. Great Britain has had more open and accepting views of gender roles over a longer period of time compared to more conservative, traditional stereotypes upheld in many Indian cultures until relatively recently [@saewyc2017]. For openness, it was predicted that gender differences will emerge in India, but not in Great Britain, with women scoring higher than men in India on this trait. Further, it was proposed that Great Britain participants would score higher on OE compared to Indian participants.
 
-This study investigated gender differences by country, comparing Great Britain (including England, Whales, and Scotland, but not Northern Ireland) to India. These countries are compared because they are represented in roughly even numbers in this dataset, and because of their cultural differences in gender stereotypes. Great Britain has had more open and accepting views of gender roles over a longer period of time compared to more conservative, traditional stereotypes upheld in many Indian cultures until relatively recently [@saewyc2017]. For extraversion it was hypothesized that overall, males would score higher than females, however this gender difference should be greater in Indian participants compared to participants in Great Britain. There was no prediction about differences in extraversion between the two countries. For OE, it was predicted that gender differences will emerge in India, but not in Great Britain, with women scoring higher than men in India on this trait. Further, it was proposed that Great Britain participants would score higher on OE compared to Indian participants.
+<!-- Most gender comparisons report women scoring higher than men in extraversion [@goodwin2004; @weisberg2011]. However most of this work has been done in white, U.S. samples, and when @lynn1997 collected a large, cross-cultural dataset, men were found to display higher levels of extraversion compared to women in 30 out of 37 countries examined [@lynn1997]. In only 5 countries (including the United States, Mexico, France, Austria, and Japan) women scored significantly higher than men [@lynn1997], showing the importance of regional differences in gender-based personality comparisons.For extraversion it was hypothesized that overall, males would score higher than females, however this gender difference should be greater in Indian participants compared to participants in Great Britain. There was no prediction about differences in extraversion between the two countries.   -->
+
+
+
+
 
 
 
 ```{r Data-cleaning, eval=TRUE, echo=TRUE, include=FALSE}
 
-#Look at all the variables in teh data
+#Look at all the variables in the data
 h = raw_data %>% 
   mutate_if(is.integer, as.numeric) %>% 
   select_if(is.numeric) %>% 
@@ -315,48 +321,104 @@ df_obl %>%
 ```{r regression, eval=TRUE, echo=TRUE, include=FALSE}
 anova_data_wide = raw_data %>% 
   dplyr::select(-c(race,engnat,hand,source)) %>%  #retain only those columns required for the analysis
-  mutate(country = as.factor(country)) %>%
-  filter(country == "GB" | country == "IN", age >=18 & age <= 80 ) %>%  #Use ONLY Great Britain and India cases, and age between 18 and 80 years
+  filter(country %in% c("GB", "IN"), age >=18 & age <= 80) %>%   #Use ONLY Great Britain and India cases, and age between 18 and 80 years
+  mutate(country = as.factor(country)) %>% 
   filter_if(is.numeric, all_vars((.) != 0)) %>%  #dropping all rows with missing values
-  mutate(gender = recode(gender, `1` = "Male", `2` = "Female", `3` = "Other")) %>% 
+  mutate(gender = recode(gender, `1` = "Male", `2` = "Female", `3` = "Other")) %>%
   filter(gender != "Other") %>% #retain only males and females
+  mutate(gender = as.factor(gender)) %>%
   select(c(age,country,gender,O1:O10, E1:E10)) %>%
   rowwise() %>%
   #score variables, r annoted are reverse scored items
-  mutate(E4r = (6-E4), 
+  mutate(E4r = (6-E4),
          E6r = (6-E6),
          E8r = (6-E8),
          E10r = (6-E10),
          O2r = (6-O2),
-         O4r = (6-O4)) %>% 
+         O4r = (6-O4)) %>%
  mutate(E = sum(E1, E2, E3,E4r, E5,E6r, E7, E8r, E9, E10r),
   O =sum(O1, O2r, O3, O4r, O5, O6, O7)) %>%
-  select(age,country,gender, E, O) 
+  select(age,country,gender, E, O)
 
+# descriptives tables
 
-# descrptives
-anova_data_wide%>%
-  pivot_longer(
-    cols = c(O, E),
-    names_to =  "personality",
-    values_to = "values"
-  ) %>%
-  ggplot(aes(x = values, fill = personality)) +
-  geom_histogram() +
-  facet_wrap(~personality + country) +
-  theme_minimal()
+# anova_desc_e <- anova_data_wide %>% 
+#   group_by(country,gender) %>% 
+#   summarize(mean_ex = mean(E), sd_ex = sd(E))
+# anova_desc_e
 
-# Anova: 
+anova_desc_o <- anova_data_wide %>% 
+  group_by(country,gender) %>% 
+  summarize(mean_o = mean(O), sd_o = sd(O))
+anova_desc_o
 
-anovaR <- aov(O ~ country + gender, data = anova_data_wide)
-summary(anovaR) 
+# descrptives plot
+ggplot(anova_desc_o, aes(x = country, y = mean_o, fill = gender)) +
+  theme_bw() +
+  geom_bar(position = "dodge", stat = "identity", color="black") +
+  geom_errorbar(
+    aes(ymin = mean_o - sd_o, ymax = mean_o+sd_o),
+    width=0.2, alpha = 0.7, 
+    position = position_dodge(.9)) +
+  scale_x_discrete(labels = c("Great Britain", "India")) +
+  ggtitle("Average Openness Scores by Country and Gender") +
+  labs(x = "Country",
+       y = "Mean Openness Scores",
+       fill = "Gender")
   
 
-anovaR <- aov(E ~ country + gender, data = anova_data_wide)
+
+
+# anova_data_long <- anova_data_wide%>%
+#   pivot_longer(
+#     cols = c(O, E),
+#     names_to =  "personality trait",
+#     values_to = "values")
+# anova_data_long
+# 
+# anova_desc_plot <- anova_data_long %>% 
+#   ggplot(aes(x = values, fill = personality)) +
+#   theme_minimal() +
+#   geom_histogram() +
+#   facet_wrap(~personality + country)
+  
+
+# AAnalysis 
+
+anovaR <- aov(O ~ country + gender + gender*country, data = anova_data_wide)
 summary(anovaR) 
+  
+# anovaR <- aov(E ~ country + gender, data = anova_data_wide)
+# summary(anovaR) 
 
 
 # figures
+anova_plot <- anova_data_wide %>% 
+  select(country,gender, O)
+anova_plot
+
+# interaction.plot(anova_plot$country, anova_plot$gender, anova_plot$O, 
+#                  xlab= "Country",
+#                  ylab = "Openness",
+#                  main="Interaction between Country and Gender on Openness",
+#                  trace.label = "Gender",
+#                  type = "b",
+#                  col=c("red", "green"))
+
+
+
+anova_plot %>% 
+  ggplot(aes(x = country, color = gender, group = gender, y = O)) +
+  stat_summary(fun.y = mean, geom = "point") +
+  stat_summary(fun.y = mean, geom = "line") +
+  labs(title = "Interaction of Country and Gender on Openness",
+       x = "Country",
+       y = "Openness to Experience",
+       group = "Gender") +
+  scale_x_discrete(labels = c("Great Britain", "India"))
+  
+           
+
 ggplot(anova_data_wide, aes(x = country, y = O, color = gender)) + 
   geom_boxplot() +
   theme_minimal() +
@@ -364,17 +426,27 @@ ggplot(anova_data_wide, aes(x = country, y = O, color = gender)) +
        x = "country",
        y = "Openness to Experience")
 
-ggplot(anova_data_wide, aes(x = country, y = E, color = gender)) + 
-  geom_boxplot() +
-  theme_minimal() +
-  labs(title = "Comparison of Extraversion across Genders between The Great Britain and India",
-       x = "country",
-       y = "Extraversion")
- 
 
- 
+```
 
+```{r anova tables}
+# (table_4 <- anova_desc_e %>% 
+#   kbl(col.names = c("Country", "Gender", "Mean", "SD"), # renaming the columns
+#       digits = 2,
+#       caption = "<b>Table 1</b><br /> <i>A Summary Table for Extraversion Scores by Country and Gender.</i>",
+#       align =  "c") %>% #align center 
+#   kable_classic(full_width = TRUE) %>% 
+#   group_rows("Great Britain", 1, 2) %>%
+#   group_rows("India", 3, 4))
 
+(table_5 <- anova_desc_o %>% 
+  kbl(col.names = c("Country", "Gender", "Mean", "SD"), # renaming the columns
+      digits = 2,
+      caption = "<b>Table 1</b><br /> <i>A Summary Table for Openness Scores by Country and Gender.</i>",
+      align =  "c") %>% #align center 
+  kable_classic(full_width = TRUE) %>% 
+  group_rows("Great Britain", 1, 2) %>%
+  group_rows("India", 3, 4))
 ```
 
 # Results
