@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.11.8)  5 DEC 2020 19:50
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.11.8)  5 DEC 2020 20:13
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -677,19 +677,16 @@ ap}
 ] [2] [3]
 \openout3 = `final_project.ttt'.
 
-(final_project.ttt) [4]
+(final_project.ttt) [4] [5]
 \openout4 = `final_project.fff'.
 
 (final_project.fff)
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 2
-11.
+14.
 (/Users/sdonalds/Library/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
-Underfull \vbox (badness 1436) has occurred while \output is active []
-
-[5] [6] [7] [8] AED endfloat: Processing end Figures and Tables [9] (./final_pr
-oject.ttt
+) [6] [7] [8] [9] AED endfloat: Processing end Figures and Tables [10] (./final
+_project.ttt
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <5> on input line 42.
 
@@ -698,18 +695,18 @@ LaTeX Warning: Float too large for page by 57.66295pt on input line 106.
 
 LaTeX Warning: Float too large for page by 57.66295pt on input line 182.
 
-) [10
+) [11
 
 
-] [11] [12] (./final_project.fff
-<final_project_files/figure-latex/errorbars-1.pdf, id=169, 578.16pt x 469.755pt
+] [12] [13] (./final_project.fff
+<final_project_files/figure-latex/errorbars-1.pdf, id=174, 578.16pt x 469.755pt
 >
 File: final_project_files/figure-latex/errorbars-1.pdf Graphic file (type pdf)
 <use final_project_files/figure-latex/errorbars-1.pdf>
 Package pdftex.def Info: final_project_files/figure-latex/errorbars-1.pdf  used
  on input line 5.
 (pdftex.def)             Requested size: 469.75385pt x 381.675pt.
-<final_project_files/figure-latex/parallel-analysis-1.pdf, id=170, 578.16pt x 4
+<final_project_files/figure-latex/parallel-analysis-1.pdf, id=175, 578.16pt x 4
 69.755pt>
 File: final_project_files/figure-latex/parallel-analysis-1.pdf Graphic file (ty
 pe pdf)
@@ -717,16 +714,16 @@ pe pdf)
 Package pdftex.def Info: final_project_files/figure-latex/parallel-analysis-1.p
 df  used on input line 12.
 (pdftex.def)             Requested size: 469.75385pt x 381.675pt.
-) [13
+) [14
 
- <./final_project_files/figure-latex/errorbars-1.pdf>] [14 <./final_project_fil
+ <./final_project_files/figure-latex/errorbars-1.pdf>] [15 <./final_project_fil
 es/figure-latex/parallel-analysis-1.pdf>] (./final_project.aux)
 Package rerunfilecheck Info: File `final_project.out' has not changed.
 (rerunfilecheck)             Checksum: 172E6E40AF34CFBB2B0288216F34F7FE;671.
  ) 
 Here is how much of TeX's memory you used:
- 14652 strings out of 481433
- 217133 string characters out of 5919429
+ 14653 strings out of 481433
+ 217140 string characters out of 5919429
  580460 words of memory out of 5000000
  31050 multiletter control sequences out of 15000+600000
  583722 words of font info for 73 fonts, out of 8000000 for 9000
@@ -744,10 +741,10 @@ TinyTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb></Users/sdonalds/Library/Tiny
 TeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb></Users/sdonalds/Library/TinyTe
 X/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></Users/sdonalds/Library/TinyTeX/
 texmf-dist/fonts/type1/public/lm/lmtt12.pfb>
-Output written on final_project.pdf (14 pages, 194481 bytes).
+Output written on final_project.pdf (15 pages, 194758 bytes).
 PDF statistics:
- 241 PDF objects out of 1000 (max. 8388607)
- 210 compressed objects within 3 object streams
- 67 named destinations out of 1000 (max. 500000)
+ 245 PDF objects out of 1000 (max. 8388607)
+ 213 compressed objects within 3 object streams
+ 68 named destinations out of 1000 (max. 500000)
  67 words of extra memory for PDF output out of 10000 (max. 10000000)
 
