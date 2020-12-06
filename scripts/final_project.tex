@@ -120,6 +120,8 @@
 \renewcommand{\efloat@iwrite}[1]{\immediate\expandafter\protected@write\csname efloat@post#1\endcsname{}}
 \makeatother
 \usepackage{csquotes}
+\usepackage{endnotes}
+\let\footnote\endnote
 \ifxetex
   % Load polyglossia as late as possible: uses bidi with RTL langages (e.g. Hebrew, Arabic)
   \usepackage{polyglossia}
@@ -156,11 +158,9 @@ Several studies have supported the replicability of the Big 5 model across cultu
 
 The Five Factor Model of personality structure (FFM) proposes that personality can be divided into five unique facets: Extraversion, Openness to Experience, Agreeableness, Conscientiousness, and Neuroticism. Typically, the Big Five Personality Inventory (BFI; {\textbf{???}}) has garnered support due to a strict extraction of these five factors. However, this has limited the scope of how personality has been understood across cultures. There is a need to understand the emic structures over imposing etic structures on datasets. We need to focus on how we could add a more stringent way of unearthing personality models. A more robust model would be the one that emerges through emic methods rather than etic methods. Using a large, open-source dataset, we will investigate whether the FFM remains true for U.S. participants. As an exploratory analysis, there is no prediction as to the number of factors that may emerge.
 
-The comparison of personality factors between genders and countries is important to our understanding of general human variation ({\textbf{???}}). Most gender comparisons report women scoring higher than men in extraversion ({\textbf{???}}; {\textbf{???}}). However most of this work has been done in white, U.S. samples, and when ({\textbf{???}}) collected a large, cross-cultural dataset, men were found to display higher levels of extraversion compared to women in 30 out of 37 countries examined ({\textbf{???}}). In only 5 countries (including the United States, Mexico, France, Austria, and Japan) women scored significantly higher than men ({\textbf{???}}), showing the importance of regional differences in gender-based personality comparisons.
+The comparison of personality factors between genders and countries is important to our understanding of general human variation ({\textbf{???}}). The trait of openness to experience (OE) reflects imagination, creativity, intellectual curiosity, and an appreciation for new, complex, aesthetic experiences ({\textbf{???}}). Gender comparisons on this trait are mixed world-wide. As an overall factor, very few gender differences are found (baer2008; {\textbf{???}}; {\textbf{???}}). It is only when this factor is broken down into sub-categories that gender differences emerge. For example, men tend to score higher on openness to ideas, while women have been found to score higher than men on openness to aesthetics and feelings ({\textbf{???}}; {\textbf{???}}). Further, the extent of gender differences in openness differs by country, with larger differences found in countries with more traditional male and female gender roles, such as in eastern cultures ({\textbf{???}}). Therefore, comparing personality differences by gender and country can identify important cultural distinctions on typical gender stereotypes.
 
-The trait of openness to experience (OE) reflects imagination, creativity, intellectual curiosity, and an appreciation for new, complex, aesthetic experiences ({\textbf{???}}). Gender comparisons on this trait are mixed world-wide. As an overall factor, very few gender differences are found (baer2008; {\textbf{???}}; {\textbf{???}}). It is only when this factor is broken down into sub-categories that gender differences emerge. For example, men tend to score higher on openness to ideas, while women have been found to score higher than men on openness to aesthetics and feelings ({\textbf{???}}; {\textbf{???}}). Further, the extent of gender differences in openness differs by country, with larger differences found in countries with more traditional male and female gender roles, such as in eastern cultures ({\textbf{???}}). Therefore, comparing personality differences by gender and country can identify important cultural distinctions on typical gender stereotypes.
-
-This study investigated gender differences by country, comparing Great Britain (including England, Whales, and Scotland, but not Northern Ireland) to India. These countries are compared because they are represented in roughly even numbers in this dataset, and because of their cultural differences in gender stereotypes. Great Britain has had more open and accepting views of gender roles over a longer period of time compared to more conservative, traditional stereotypes upheld in many Indian cultures until relatively recently ({\textbf{???}}). For extraversion it was hypothesized that overall, males would score higher than females, however this gender difference should be greater in Indian participants compared to participants in Great Britain. There was no prediction about differences in extraversion between the two countries. For OE, it was predicted that gender differences will emerge in India, but not in Great Britain, with women scoring higher than men in India on this trait. Further, it was proposed that Great Britain participants would score higher on OE compared to Indian participants.
+This study investigated gender differences by country, comparing Great Britain (including England, Whales, and Scotland, but not Northern Ireland) to India. These countries are compared because they are represented in roughly even numbers in this dataset, and because of their cultural differences in gender stereotypes. Great Britain has had more open and accepting views of gender roles over a longer period of time compared to more conservative, traditional stereotypes upheld in many Indian cultures until relatively recently ({\textbf{???}}). Thus, we predict a main effect of country such that Great Britain will display higher overall openness scores compared to India. Given mixed findings on gender differences ({\textbf{???}}) no prediction was made for a main effect of gender on openness. Finally, it was predicted that gender differences will emerge in Great Britain, but not in India, with men scoring higher than women in Great Britain on this trait. Due to the more relaxed attitudes towards gender role conformity in Great Britain, it is likely that men are more comfortable reporting openness traits of creativity, intellectual curiosity, and an appreciation for aesthetics in Great Britain, while Indian men are more likely to conform to traditionalist views.
 
 \begin{table}[tbp]
 
@@ -197,13 +197,15 @@ O & 25.17 & 26.41 & -14.19 & 0.00 & 0.49\\
 \hypertarget{procedure}{%
 \subsection{Procedure}\label{procedure}}
 
-The dataset for the analysis was obtained from \(Open-Source Psychometrics Project\) repository. This is the link to the website. \href{https://openpsychometrics.org/_rawdata/}{Open Source Psychometric project}.It contains data on the Big 5 personality variables \((Extraversion, Neuroticism, Agreeableness, Conscientiousness, Openness to Experience)\) and demographics \((race, age, gender, country)\). 6761 participants voluntarily responded to the questionnaires. We retained participants between the ages of 18 and 80 based on the strogheld assumption that personality develops at the age of 18. For the principal components analysis, only participants from United states of America were used. Participants (\emph{Females} = 4473, \emph{Males}= 2288) in this study were between the ages, as mentioned previously, of 18 and 80 (\emph{M} = 30.07, \emph{SD} = 12.77).
+The dataset for the analysis was obtained from the Open-Source Psychometrics Project repository:\href{https://openpsychometrics.org/_rawdata/}{Open Source Psychometric project}.It contains data on the Big 5 personality variables \((Extraversion, Neuroticism, Agreeableness, Conscientiousness, Openness to Experience)\) and demographics \((race, age, gender, country)\). 6761 participants voluntarily responded to the questionnaires. We retained participants between the ages of 18 and 80 based on the strogheld assumption that personality develops at the age of 18. For the principal components analysis, only participants from United states of America were used. Participants (\emph{Females} = 4473, \emph{Males}= 2288) in this study were between the ages, as mentioned previously, of 18 and 80 (\emph{M} = 30.07, \emph{SD} = 12.77).
 For the country and gender comparisons, we included participants from either Great Britain or India who identified as either male or female.
 
 \hypertarget{data-analysis}{%
 \subsection{Data analysis}\label{data-analysis}}
 
-We used R (Version 4.0.2; R Core Team, 2019) and the R-packages \emph{dbplyr} (Version 2.0.0; Wickham \& Ruiz, 2019), \emph{devtools} (Version 2.3.2; Wickham et al., 2020b), \emph{dplyr} (Version 1.0.2; Wickham et al., 2020a), \emph{forcats} (Version 0.5.0; Wickham, 2019a), \emph{gapminder} (Bryan, 2017), \emph{ggplot2} (Version 3.3.2; Wickham, 2016), \emph{ggpubr} (Version 0.4.0; Kassambara, 2020a), \emph{GPArotation} (Version 2014.11.1; Bernaards \& I.Jennrich, 2005), \emph{here} (Version 0.1; Müller, 2017), \emph{janitor} (Version 2.0.1; Firke, 2020), \emph{knitr} (Version 1.30; Xie, 2015), \emph{MASS} (Version 7.3.53; Venables \& Ripley, 2002), \emph{papaja} (Version 0.1.0.9997; Aust \& Barth, 2020), \emph{paran} (Version 1.5.2; Dinno, 2018), \emph{psych} (Version 2.0.9; Revelle, 2020), \emph{purrr} (Version 0.3.4; Henry \& Wickham, 2020), \emph{readr} (Version 1.4.0; Wickham, Hester, \& Francois, 2018), \emph{rio} (Version 0.5.16; Chan, Chan, Leeper, \& Becker, 2018), \emph{rstatix} (Version 0.6.0; Kassambara, 2020b), \emph{scales} (Version 1.1.1; Wickham \& Seidel, 2019), \emph{stringr} (Version 1.4.0; Wickham, 2019b), \emph{tibble} (Version 3.0.4; Müller \& Wickham, 2020), \emph{tidyr} (Version 1.1.2; Wickham, 2020), \emph{tidyverse} (Version 1.3.0; Wickham, Averick, et al., 2019), \emph{tinytex} (Version 0.27; Xie, 2019), and \emph{usethis} (Version 1.6.3; Wickham \& Bryan, 2020) for all our analyses. Items were reverse scored if needed and total scores were obtained on the Big 5 variables for every participant. We obtained descriptive statistics for all the Big five variables. We used Principal components analysis to study the factor structure of the present data. Parallel analysis was computed to determine the number of factors to be extracted. These factors were further rotated using varimax and oblimin rotations.
+We used R (Version 4.0.2; R Core Team, 2019) and the R-packages \emph{dbplyr} (Version 2.0.0; Wickham \& Ruiz, 2019), \emph{devtools} (Version 2.3.2; Wickham et al., 2020b), \emph{dplyr} (Version 1.0.2; Wickham et al., 2020a), \emph{forcats} (Version 0.5.0; Wickham, 2019a), \emph{gapminder} (Bryan, 2017), \emph{ggplot2} (Version 3.3.2; Wickham, 2016), \emph{ggpubr} (Version 0.4.0; Kassambara, 2020a), \emph{GPArotation} (Version 2014.11.1; Bernaards \& I.Jennrich, 2005), \emph{here} (Version 0.1; Müller, 2017), \emph{janitor} (Version 2.0.1; Firke, 2020), \emph{kableExtra} (Version 1.3.1; Zhu, 2020), \emph{knitr} (Version 1.30; Xie, 2015), \emph{MASS} (Version 7.3.53; Venables \& Ripley, 2002), \emph{papaja} (Version 0.1.0.9997; Aust \& Barth, 2020), \emph{paran} (Version 1.5.2; Dinno, 2018), \emph{psych} (Version 2.0.9; Revelle, 2020), \emph{purrr} (Version 0.3.4; Henry \& Wickham, 2020), \emph{readr} (Version 1.4.0; Wickham, Hester, \& Francois, 2018), \emph{rio} (Version 0.5.16; Chan, Chan, Leeper, \& Becker, 2018), \emph{rstatix} (Version 0.6.0; Kassambara, 2020b), \emph{scales} (Version 1.1.1; Wickham \& Seidel, 2019), \emph{stringr} (Version 1.4.0; Wickham, 2019b), \emph{tibble} (Version 3.0.4; Müller \& Wickham, 2020), \emph{tidyr} (Version 1.1.2; Wickham, 2020), \emph{tidyverse} (Version 1.3.0; Wickham, Averick, et al., 2019), \emph{tinytex} (Version 0.27; Xie, 2019), and \emph{usethis} (Version 1.6.3; Wickham \& Bryan, 2020) for all our analyses. Items were reverse scored if needed and total scores were obtained on the Big 5 variables for every participant. We obtained descriptive statistics for all the Big five variables. We used Principal components analysis to study the factor structure of the present data. Parallel analysis was computed to determine the number of factors to be extracted. These factors were further rotated using varimax and oblimin rotations.
+
+Then, we gathered data only from Great Britain and Indian participants who identified as either male or female, and were between the ages of 18 and 80. A 2x2 between-subjects ANOVA was used to analyze main effects and interactions on openness scores for both country (Great Britain vs.~India) and gender (Male vs.~Female).
 
 \begin{figure}
 \centering
@@ -372,11 +374,83 @@ O4r & 0.07 & -0.12 & 0.10 & -0.09 & 0.23 & 0.45 & 0.58\\
 
 \end{table}
 
-\hypertarget{results}{%
-\section{Results}\label{results}}
+\begin{table}[tbp]
 
+\begin{center}
+\begin{threeparttable}
+
+\caption{\label{tab:anova descriptives table}Summary Table for Openness Scores by Country and Gender}
+
+\begin{tabular}{cccc}
+\toprule
+country & \multicolumn{1}{c}{gender} & \multicolumn{1}{c}{mean\_o} & \multicolumn{1}{c}{sd\_o}\\
+\midrule
+GB & Female & 24.90 & 3.36\\
+GB & Male & 26.35 & 3.32\\
+IN & Female & 24.16 & 3.59\\
+IN & Male & 24.52 & 3.58\\
+\bottomrule
+\addlinespace
+\end{tabular}
+
+\begin{tablenotes}[para]
+\normalsize{\textit{Note.} GB = Great Britain, IN = India}
+\end{tablenotes}
+
+\end{threeparttable}
+\end{center}
+
+\end{table}
+
+\begin{table}[tbp]
+
+\begin{center}
+\begin{threeparttable}
+
+\caption{\label{tab:anova_summary_table}ANOVA table for Openness by Country and Gender}
+
+\begin{tabular}{lrcrrrl}
+\toprule
+Effect & \multicolumn{1}{c}{$F$} & \multicolumn{1}{c}{$\mathit{df}_1$} & \multicolumn{1}{c}{$\mathit{df}_2$} & \multicolumn{1}{c}{$\mathit{MSE}$} & \multicolumn{1}{c}{$p$} & \multicolumn{1}{c}{$\hat{\eta}^2_p$}\\
+\midrule
+Country & 63.84 & 1 & 2,444 & 12.07 & < .001 & .025\\
+Gender & 36.03 & 1 & 2,444 & 12.07 & < .001 & .015\\
+Country $\times$ Gender & 14.70 & 1 & 2,444 & 12.07 & < .001 & .006\\
+\bottomrule
+\end{tabular}
+
+\end{threeparttable}
+\end{center}
+
+\end{table}
+
+\begin{figure}
+\centering
+\includegraphics{final_project_files/figure-latex/barplot-1.pdf}
+\caption{\label{fig:barplot}Average Openness Scores by Country and Gender}
+\end{figure}
+
+\begin{figure}
+\centering
+\includegraphics{final_project_files/figure-latex/boxplot-1.pdf}
+\caption{\label{fig:boxplot}Boxplot of Openness Scores by Country and Gender}
+\end{figure}
+
+\begin{verbatim}
+## Warning: `fun.y` is deprecated. Use `fun` instead.
+
+## Warning: `fun.y` is deprecated. Use `fun` instead.
+\end{verbatim}
+
+\includegraphics{final_project_files/figure-latex/interaction_plot-1.pdf}
+\# Results
 Table~\ref{tab:descriptiveTable} displays a summary of differences between males and females and Chronbach's alpha value for all Big 5 variables. There is a significant difference in all the variables for males and females except for Extraversion in this sample. We took a closer look at the error bars to see if there is any overlap. Figure~\ref{fig:errorbars} indicates a very high overlap for genders across Big 5 variables with an almost exact range for Extraversion. This indicates that there is not much difference in the levels of Big 5 in males and females in this sample. All the alpha values seem reasonably acceptable except for a low value for Openness.
+
 Parallel analysis (Horn's method) suggested 7 factors to be retained as seen in Figure~\ref{fig:parallel-analysis}. The seven factor solution was rotated using varimax and oblimin rotations. An examination of loadings matrix for varimax rotation Table~\ref{tab:varimaxTable} and structure matrix for oblimin rotation Table~\ref{tab:obliminTable} indicate a clear emergence of the first three factors -Extraversion, Neuroticism, Agreeableness - indicating the respective items with highest loading on those factors. The last two factors - Conscientiousness and Openness - tend to split into multiple factors.
+
+A 2x2 (Country: Great Britain vs.~India; Gender: Male vs.~Female) between-subjects ANOVA was run to analyze a main effect of country, a main effect of gender, and an interaction between the two on the personality trait openness. It was hypothesized first, that there would be a main effect of country where Great Britain would show higher openness scores compared to India. Second, we predicted an interaction where males would score higher than females on trait openness in Great Britain, but not in India. There was no prediction for overall gender differences in openness. See Table~@ref(tab:anova\_summary\_table) for a summary of openness means and standard deviations by country and gender.
+
+Results found a main effect of country () such that participants from Great Britain (----) showed higher levels of openness compared to India (--). An overall main effect of gender was discovered (), finding that Males (--) scored higher than females (M--). See Figure~\ref{fig:barplot} and Figure~\ref{fig:boxplot} for graphical representations of group means. Finally, there was a significant interaction between country and gender (---). Males in Great Britain showed the highest levels of openness (----), and gender differences were more pronounced in Great Britain compared to India (see Figure~@ref(fig:interaction\_plot)).
 
 \hypertarget{discussion}{%
 \section{Discussion}\label{discussion}}
@@ -474,7 +548,13 @@ Xie, Y. (2015). \emph{Dynamic documents with R and knitr} (2nd ed.). Boca Raton,
 \leavevmode\hypertarget{ref-R-tinytex}{}%
 Xie, Y. (2019). TinyTeX: A lightweight, cross-platform, and easy-to-maintain latex distribution based on tex live. \emph{TUGboat}, (1), 30--32. Retrieved from \url{http://tug.org/TUGboat/Contents/contents40-1.html}
 
+\leavevmode\hypertarget{ref-R-kableExtra}{}%
+Zhu, H. (2020). \emph{KableExtra: Construct complex table with 'kable' and pipe syntax}. Retrieved from \url{https://CRAN.R-project.org/package=kableExtra}
+
 \endgroup
 
+
+\clearpage
+\theendnotes
 
 \end{document}

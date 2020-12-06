@@ -12,3 +12,17 @@
 \includegraphics{final_project_files/figure-latex/parallel-analysis-1.pdf}
 \caption{\label{fig:parallel-analysis}Parallel analysis}
 \end{figure*}
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{final_project_files/figure-latex/barplot-1.pdf}
+\caption{\label{fig:barplot}Average Openness Scores by Country and Gender}
+\end{figure*}
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{final_project_files/figure-latex/boxplot-1.pdf}
+\caption{\label{fig:boxplot}Boxplot of Openness Scores by Country and Gender}
+\end{figure*}

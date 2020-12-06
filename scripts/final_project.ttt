@@ -180,3 +180,55 @@ O4r & 0.07 & -0.12 & 0.10 & -0.09 & 0.23 & 0.45 & 0.58\\
 \end{center}
 
 \end{table*}
+\begin{table*}[hbt]
+\ifnextchar[{\eatarg}{}
+[tbp]
+
+\begin{center}
+\begin{threeparttable}
+
+\caption{\label{tab:anova descriptives table}Summary Table for Openness Scores by Country and Gender}
+
+\begin{tabular}{cccc}
+\toprule
+country & \multicolumn{1}{c}{gender} & \multicolumn{1}{c}{mean\_o} & \multicolumn{1}{c}{sd\_o}\\
+\midrule
+GB & Female & 24.90 & 3.36\\
+GB & Male & 26.35 & 3.32\\
+IN & Female & 24.16 & 3.59\\
+IN & Male & 24.52 & 3.58\\
+\bottomrule
+\addlinespace
+\end{tabular}
+
+\begin{tablenotes}[para]
+\normalsize{\textit{Note.} GB = Great Britain, IN = India}
+\end{tablenotes}
+
+\end{threeparttable}
+\end{center}
+
+\end{table*}
+\begin{table*}[hbt]
+\ifnextchar[{\eatarg}{}
+[tbp]
+
+\begin{center}
+\begin{threeparttable}
+
+\caption{\label{tab:anova_summary_table}ANOVA table for Openness by Country and Gender}
+
+\begin{tabular}{lrcrrrl}
+\toprule
+Effect & \multicolumn{1}{c}{$F$} & \multicolumn{1}{c}{$\mathit{df}_1$} & \multicolumn{1}{c}{$\mathit{df}_2$} & \multicolumn{1}{c}{$\mathit{MSE}$} & \multicolumn{1}{c}{$p$} & \multicolumn{1}{c}{$\hat{\eta}^2_p$}\\
+\midrule
+Country & 63.84 & 1 & 2,444 & 12.07 & < .001 & .025\\
+Gender & 36.03 & 1 & 2,444 & 12.07 & < .001 & .015\\
+Country $\times$ Gender & 14.70 & 1 & 2,444 & 12.07 & < .001 & .006\\
+\bottomrule
+\end{tabular}
+
+\end{threeparttable}
+\end{center}
+
+\end{table*}
