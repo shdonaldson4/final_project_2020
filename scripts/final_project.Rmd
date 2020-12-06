@@ -1,45 +1,46 @@
 ---
-title             : "What is the personality structure of US?: A commentary on methods"
-shorttitle        : "Personality structure of US data"
+title             : "Assessing US Personality Structure and Cross Cultural Comparisons"
+shorttitle        : "Personality Structure and Comparisons"
 
 author: 
   - name          : "Vinita Vader"
     affiliation   : "1"
     corresponding : yes    # Define only one corresponding author
-    address       : "Postal address"
     email         : "vvader@uoregon.edu"
-    role:         # Contributorship roles (e.g., CRediT, https://casrai.org/credit/)
-      - Conceptualization
-      - Writing - Original Draft Preparation
-      - Writing - Review & Editing
-  - name          : "Xiayou Liu"
+    # #role:         # Contributorship roles (e.g., CRediT, https://casrai.org/credit/)
+    #   - Conceptualization of PCA
+    #   - Coding - Analysis plan and initial coding
+    #   - Writing - Original draft preparation
+    #   - Writing - Review & editing
+  - name          : "Xiaoyu Liu"
     affiliation   : "1"
-    role:
-      - Writing - Review & Editing
+    # role:
+    #   - Coding - Data wrangling, regression analysis, and visualization
+    #   - Writing - Review & Editing
+      
   - name          : "Sarah Donaldson"
     affiliation   : "1"
-    role:
-      - Writing - Review & Editing
+    # role:
+    #   - Conceptualization of Regression Analyses
+    #   - Coding - Data wrangling, regression analysis, and visualization
+    #   - Writing - Contribution to Introduction, Results, and Discussion, Review & Editing
 affiliation:
   - id            : "1"
     institution   : "University of Oregon"
 
 
 authornote: |
-  Add complete departmental affiliations for each author here. Each new line herein must be indented, like this line.
 
-  Enter author note here.
+  Vinita Vader and Sarah Donaldson are members of the Psychology Department at the University of Oregon.
+  Xiaoyu Liu is a member of the _______ Department at the University of Oregon
 
 abstract: |
-  Several studies have supported the replicability of the Big 5 model across cultures, languages and populations. This study looks at the factor structure of personality in the US sample. A parallel analysis suggested extracting 7 factors which were further subjected to a principal components analysis. Factors structures emerging from varimax and oblimin rotations were examined. 
-  
-  This study also look at the personality difference between two countries across genders by choosing two factors: Extraversion and Openness. An 2x2 Between-Subjects ANOVA was done to examine this difference. 
+  Several studies have supported the replicability of the Big 5 model across cultures, languages and populations. First, this study looks at the factor structure of personality in a karge US sample. A parallel analysis suggested extracting 7 factors which were further subjected to a principal components analysis. Factors structures emerging from varimax and oblimin rotations were examined. Second, this study compared personality differences across gender (male vs. female) and regions (Great Britain vs. India) Two separate Between-Subjects ANOVAs were run to examine regional and gender differences in extraversion (Model 1) and in openness to experience (Model 2).
 
   
   <!-- https://tinyurl.com/ybremelq -->
   
-keywords          : "Big 5, parallel analysis, varimax, oblimin"
-wordcount         : "X"
+keywords          : "Big 5, personality, parallel analysis, varimax, oblimin, cultural differences, gender differences"
 
 bibliography      : ["r-references.bib"]
 
@@ -47,7 +48,7 @@ floatsintext      : no
 figurelist        : no
 tablelist         : no
 footnotelist      : no
-linenumbers       : yes
+linenumbers       : no
 mask              : no
 draft             : no
 
@@ -87,9 +88,11 @@ devtools::install_github("rkabacoff/factorAnalysis") #Not on cran
 library("papaja")
 #library(xlsx)
 library(rstatix)
+if(!require(GPArotation)){
+   install.packages("devtools")}
 library(ggpubr)
+library(GPArotation)
 r_refs("r-references.bib")
-
 
 
 raw_data = import(here("data", "data.csv"), setclass = "tbl_df")
@@ -98,7 +101,15 @@ raw_data = import(here("data", "data.csv"), setclass = "tbl_df")
 
 # Introduction 
 
-Big 5 personality structure has garnered support due to a strict extraction of five factors. This has limited the scope of how personality has been understood across cultures. There is a need to understand the emic structures over imposing etic structures on datasets.We need to focus on how we could add a more stringent way of unearthing personality models. A more robust model would be the one that emerges through emic methods rather than etic methods.   
+<!-- Please explain emic vs etic structures -->
+The Five Factor Model of personality structure (FFM) proposes that personality can be divided into five unique facets: Extraversion, Openness to Experience, Agreeableness, Conscientiousness, and Neuroticism. Typically, the Big Five Personality Inventory [BFI; @john1991]  has garnered support due to a strict extraction of these five factors. However, this has limited the scope of how personality has been understood across cultures. There is a need to understand the emic structures over imposing etic structures on datasets. We need to focus on how we could add a more stringent way of unearthing personality models. A more robust model would be the one that emerges through emic methods rather than etic methods. Using a large, open-source dataset, we will investigate whether the FFM remains true for U.S. participants. As an exploratory analysis, there is no prediction as to the number of factors that may emerge.
+
+The comparison of personality factors between genders and countries is important to our understanding of general human variation [@weisberg2011]. Most gender comparisons report women scoring higher than men in extraversion [@goodwin2004; @weisberg2011]. However most of this work has been done in white, U.S. samples, and when @lynn1997 collected a large, cross-cultural dataset, men were found to display higher levels of extraversion compared to women in 30 out of 37 countries examined [@lynn1997]. In only 5 countries (including the United States, Mexico, France, Austria, and Japan) women scored significantly higher than men [@lynn1997], showing the importance of regional differences in gender-based personality comparisons. 
+
+The trait of openness to experience (OE) reflects imagination, creativity, intellectual curiosity, and an appreciation for new, complex, aesthetic experiences [@weisberg2011]. Gender comparisons on this trait are mixed world-wide. As an overall factor, very few gender differences are found [baer2008; @costa2001; @silva2010]. It is only when this factor is broken down into sub-categories that gender differences emerge. For example, men tend to score higher on openness to ideas, while women have been found to score higher than men on openness to aesthetics and feelings [@costa2001; @weisberg2011]. Further, the extent of gender differences in openness differs by country, with larger differences found in countries with more traditional male and female gender roles, such as in eastern cultures [@costa2001]. Therefore, comparing personality differences by gender and country can identify important cultural distinctions on typical gender stereotypes.
+
+This study investigated gender differences by country, comparing Great Britain (including England, Whales, and Scotland, but not Northern Ireland) to India. These countries are compared because they are represented in roughly even numbers in this dataset, and because of their cultural differences in gender stereotypes. Great Britain has had more open and accepting views of gender roles over a longer period of time compared to more conservative, traditional stereotypes upheld in many Indian cultures until relatively recently [@saewyc2017]. For extraversion it was hypothesized that overall, males would score higher than females, however this gender difference should be greater in Indian participants compared to participants in Great Britain. There was no prediction about differences in extraversion between the two countries. For OE, it was predicted that gender differences will emerge in India, but not in Great Britain, with women scoring higher than men in India on this trait. Further, it was proposed that Great Britain participants would score higher on OE compared to Indian participants.
+
 
 
 ```{r Data-cleaning, eval=TRUE, echo=TRUE, include=FALSE}
@@ -225,7 +236,8 @@ dplyr::left_join(table, aDF, by="variables") %>%
 # Methods
 
 ## Procedure
-The dataset for the analysis was obtained from $Open-Source Psychometrics Project$ repository. This is the link to the website. [Open Source Psychometric project](https://openpsychometrics.org/_rawdata/).It contains data on the Big 5 personality variables $(Extraversion, Neuroticism, Agreeableness, Conscientiousness, Openness to Experience)$ and demographics $(race, age, gender, country)$. `r  nrow(data)` participants voluntarily responded to the questionnaires. We retained participants between the ages of 18 and 80, from United states of America. The former inclusion criterion was based on the strogheld assumption that personality develops at the age of 18. The latter was the primary inclusion criterion given the populatuion of investigation for the current study.  Participants (*Females* = `r printnum (gender.count[1,2])`,  *Males*= `r printnum (gender.count[2,2])`) in this study were between the ages, as mentioned previously, of 18 and 80 (*M* = `r printnum(mean(data$age))`, *SD* = `r printnum(sd(data$age))`). 
+The dataset for the analysis was obtained from $Open-Source Psychometrics Project$ repository. This is the link to the website. [Open Source Psychometric project](https://openpsychometrics.org/_rawdata/).It contains data on the Big 5 personality variables $(Extraversion, Neuroticism, Agreeableness, Conscientiousness, Openness to Experience)$ and demographics $(race, age, gender, country)$. `r  nrow(data)` participants voluntarily responded to the questionnaires. We retained participants between the ages of 18 and 80 based on the strogheld assumption that personality develops at the age of 18. For the principal components analysis, only participants from United states of America were used.   Participants (*Females* = `r printnum (gender.count[1,2])`,  *Males*= `r printnum (gender.count[2,2])`) in this study were between the ages, as mentioned previously, of 18 and 80 (*M* = `r printnum(mean(data$age))`, *SD* = `r printnum(sd(data$age))`). 
+For the country and gender comparisons, we included participants from Great Britain and from India who identified as either male or female.
 
 ## Data analysis
 We used `r cite_r("r-references.bib")` for all our analyses.  Items were reverse scored if needed and total scores were obtained on the Big 5 variables for every participant. We obtained descriptive statistics for all the Big five variables. We used Principal components analysis to study the factor structure of the present data. Parallel analysis was computed to determine the number of factors to be extracted. These factors were further rotated using varimax and oblimin rotations. 
@@ -300,7 +312,7 @@ df_obl %>%
 ```
 
 
-```{r regression, eval=TRUE, echo=TRUE, include=FALSE. fig.cap = "Personality difference between the Great Britain and Indian "}
+```{r regression, eval=TRUE, echo=TRUE, include=FALSE}
 anova_data_wide = raw_data %>% 
   dplyr::select(-c(race,engnat,hand,source)) %>%  #retain only those columns required for the analysis
   mutate(country = as.factor(country)) %>%

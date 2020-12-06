@@ -1,0 +1,14 @@
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{final_project_files/figure-latex/errorbars-1.pdf}
+\caption{\label{fig:errorbars}Difference between Males and Females on Big 5 variables}
+\end{figure*}
+\begin{figure*}[hbt]
+\ifnextchar[{\eatarg}{}
+
+\centering
+\includegraphics{final_project_files/figure-latex/parallel-analysis-1.pdf}
+\caption{\label{fig:parallel-analysis}Parallel analysis}
+\end{figure*}
