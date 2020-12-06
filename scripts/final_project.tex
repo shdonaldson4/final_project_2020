@@ -6,12 +6,13 @@
   english,
   man, fleqn, noextraspace]{apa6}
 \usepackage{lmodern}
-\usepackage{amssymb,amsmath}
+\usepackage{amsmath}
 \usepackage{ifxetex,ifluatex}
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
   \usepackage[utf8]{inputenc}
   \usepackage{textcomp} % provide euro and other symbols
+  \usepackage{amssymb}
 \else % if luatex or xetex
   \usepackage{unicode-math}
   \defaultfontfeatures{Scale=MatchLowercase}
@@ -44,7 +45,7 @@
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 \urlstyle{same} % disable monospaced font for URLs
-\usepackage{graphicx,grffile}
+\usepackage{graphicx}
 \makeatletter
 \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
 \def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
@@ -129,6 +130,29 @@
 \else
   \usepackage[shorthands=off,main=english]{babel}
 \fi
+\ifluatex
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newlength{\csllabelwidth}
+\setlength{\csllabelwidth}{3em}
+\newenvironment{CSLReferences}[2] % #1 hanging-ident, #2 entry spacing
+ {% don't indent paragraphs
+  \setlength{\parindent}{0pt}
+  % turn on hanging indent if param 1 is 1
+  \ifodd #1 \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces\fi
+  % set entry spacing
+  \ifnum #2 > 0
+  \setlength{\parskip}{#2\baselineskip}
+  \fi
+ }%
+ {}
+\usepackage{calc}
+\newcommand{\CSLBlock}[1]{#1\hfill\break}
+\newcommand{\CSLLeftMargin}[1]{\parbox[t]{\csllabelwidth}{#1}}
+\newcommand{\CSLRightInline}[1]{\parbox[t]{\linewidth - \csllabelwidth}{#1}\break}
+\newcommand{\CSLIndent}[1]{\hspace{\cslhangindent}#1}
 
 \title{Assessing US Personality Structure and Cross Cultural Comparisons}
 \author{Vinita Vader\textsuperscript{1}, Xiaoyu Liu\textsuperscript{1}, \& Sarah Donaldson\textsuperscript{1}}
@@ -157,11 +181,11 @@ Several studies have supported the replicability of the Big 5 model across cultu
 \hypertarget{introduction}{%
 \section{Introduction}\label{introduction}}
 
-The Five Factor Model of personality structure (FFM) proposes that personality can be divided into five unique facets: Extraversion, Openness to Experience, Agreeableness, Conscientiousness, and Neuroticism. Typically, the Big Five Personality Inventory (BFI; {\textbf{???}}) has garnered support due to a strict extraction of these five factors. However, this has limited the scope of how personality has been understood across cultures. There is a need to understand the emic structures over imposing etic structures on datasets. We need to focus on how we could add a more stringent way of unearthing personality models. A more robust model would be the one that emerges through emic methods rather than etic methods. Using a large, open-source dataset, we will investigate whether the FFM remains true for U.S. participants. As an exploratory analysis, there is no prediction as to the number of factors that may emerge.
+The Five Factor Model of personality structure (FFM) proposes that personality can be divided into five unique facets: Extraversion, Openness to Experience, Agreeableness, Conscientiousness, and Neuroticism. Typically, the Big Five Personality Inventory {[}BFI; (\textbf{john1991?}){]} has garnered support due to a strict extraction of these five factors. However, this has limited the scope of how personality has been understood across cultures. There is a need to understand the emic structures over imposing etic structures on datasets. We need to focus on how we could add a more stringent way of unearthing personality models. A more robust model would be the one that emerges through emic methods rather than etic methods. Using a large, open-source dataset, we will investigate whether the FFM remains true for U.S. participants. As an exploratory analysis, there is no prediction as to the number of factors that may emerge.
 
-The comparison of personality factors between genders and countries is important to our understanding of general human variation ({\textbf{???}}). The trait of openness to experience (OE) reflects imagination, creativity, intellectual curiosity, and an appreciation for new, complex, aesthetic experiences ({\textbf{???}}). Gender comparisons on this trait are mixed world-wide. As an overall factor, very few gender differences are found (baer2008; {\textbf{???}}; {\textbf{???}}). It is only when this factor is broken down into sub-categories that gender differences emerge. For example, men tend to score higher on openness to ideas, while women have been found to score higher than men on openness to aesthetics and feelings ({\textbf{???}}; {\textbf{???}}). Further, the extent of gender differences in openness differs by country, with larger differences found in countries with more traditional male and female gender roles, such as in eastern cultures ({\textbf{???}}). Therefore, comparing personality differences by gender and country can identify important cultural distinctions on typical gender stereotypes.
+The comparison of personality factors between genders and countries is important to our understanding of general human variation (\textbf{weisberg2011?}). The trait of openness to experience (OE) reflects imagination, creativity, intellectual curiosity, and an appreciation for new, complex, aesthetic experiences (\textbf{weisberg2011?}). Gender comparisons on this trait are mixed world-wide. As an overall factor, very few gender differences are found {[}baer2008; (\textbf{costa2001?}); (\textbf{silva2010?}){]}. It is only when this factor is broken down into sub-categories that gender differences emerge. For example, men tend to score higher on openness to ideas, while women have been found to score higher than men on openness to aesthetics and feelings (\textbf{costa2001?}; \textbf{weisberg2011?}). Further, the extent of gender differences in openness differs by country, with larger differences found in countries with more traditional male and female gender roles, such as in eastern cultures (\textbf{costa2001?}). Therefore, comparing personality differences by gender and country can identify important cultural distinctions on typical gender stereotypes.
 
-This study investigated gender differences by country, comparing Great Britain (including England, Whales, and Scotland, but not Northern Ireland) to India. These countries are compared because they are represented in roughly even numbers in this dataset, and because of their cultural differences in gender stereotypes. Great Britain has had more open and accepting views of gender roles over a longer period of time compared to more conservative, traditional stereotypes upheld in many Indian cultures until relatively recently ({\textbf{???}}). Thus, we predict a main effect of country such that Great Britain will display higher overall openness scores compared to India. Given mixed findings on gender differences ({\textbf{???}}) no prediction was made for a main effect of gender on openness. Finally, it was predicted that gender differences will emerge in Great Britain, but not in India, with men scoring higher than women in Great Britain on this trait. Due to the more relaxed attitudes towards gender role conformity in Great Britain, it is likely that men are more comfortable reporting openness traits of creativity, intellectual curiosity, and an appreciation for aesthetics in Great Britain, while Indian men are more likely to conform to traditionalist views.
+This study investigated gender differences by country, comparing Great Britain (including England, Whales, and Scotland, but not Northern Ireland) to India. These countries are compared because they are represented in roughly even numbers in this dataset, and because of their cultural differences in gender stereotypes. Great Britain has had more open and accepting views of gender roles over a longer period of time compared to more conservative, traditional stereotypes upheld in many Indian cultures until relatively recently (\textbf{saewyc2017?}). Thus, we predict a main effect of country such that Great Britain will display higher overall openness scores compared to India. Given mixed findings on gender differences (\textbf{costa2001?}) no prediction was made for a main effect of gender on openness. Finally, it was predicted that gender differences will emerge in Great Britain, but not in India, with men scoring higher than women in Great Britain on this trait. Due to the more relaxed attitudes towards gender role conformity in Great Britain, it is likely that men are more comfortable reporting openness traits of creativity, intellectual curiosity, and an appreciation for aesthetics in Great Britain, while Indian men are more likely to conform to traditionalist views.
 
 \begin{table}[tbp]
 
@@ -198,13 +222,16 @@ O & 25.17 & 26.41 & -14.19 & 0.00 & 0.49\\
 \hypertarget{procedure}{%
 \subsection{Procedure}\label{procedure}}
 
-The dataset for the analysis was obtained from the Open-Source Psychometrics Project repository:\href{https://openpsychometrics.org/_rawdata/}{Open Source Psychometric project}.It contains data on the Big 5 personality variables \((Extraversion, Neuroticism, Agreeableness, Conscientiousness, Openness to Experience)\) and demographics \((race, age, gender, country)\). 6761 participants voluntarily responded to the questionnaires. We retained participants between the ages of 18 and 80 based on the strogheld assumption that personality develops at the age of 18. For the principal components analysis, only participants from United states of America were used. Participants (\emph{Females} = 4473, \emph{Males}= 2288) in this study were between the ages, as mentioned previously, of 18 and 80 (\emph{M} = 30.07, \emph{SD} = 12.77).
-For the country and gender comparisons, we included participants from either Great Britain or India who identified as either male or female.
+The dataset for the analysis was obtained from the Open-Source Psychometrics Project repository:\href{https://openpsychometrics.org/_rawdata/}{Open Source Psychometric project}.It contains data on the Big 5 personality variables \((Extraversion, Neuroticism, Agreeableness, Conscientiousness, Openness to Experience)\) and demographics \((race, age, gender, country)\). 6761 participants voluntarily responded to the questionnaires. We retained participants between the ages of 18 and 80 based on the strogheld assumption that personality develops at the age of 18.
+
+For the principal components analysis, only participants from United states of America were used. Participants (\emph{Females} = 4473, \emph{Males}= 2288) in this study were between the ages, as mentioned previously, of 18 and 80 (\emph{M} = 30.07, \emph{SD} = 12.77).
+
+For the country and gender comparisons, we included participants from either Great Britain (\emph{nGB} = 1122) or India (\emph{nIN} = 1326) who identified as either male (\emph{nMales}= 1257) or female (\emph{nFemales} = 1191, \emph{Total N} = 2448). Among these participants, the average age was \emph{M} = 27.63, with a standard deviation of \emph{SD} = 9.95 years.
 
 \hypertarget{data-analysis}{%
 \subsection{Data analysis}\label{data-analysis}}
 
-We used R (Version 4.0.2; R Core Team, 2019) and the R-packages \emph{dbplyr} (Version 2.0.0; Wickham \& Ruiz, 2019), \emph{devtools} (Version 2.3.2; Wickham et al., 2020b), \emph{dplyr} (Version 1.0.2; Wickham et al., 2020a), \emph{forcats} (Version 0.5.0; Wickham, 2019a), \emph{gapminder} (Bryan, 2017), \emph{ggplot2} (Version 3.3.2; Wickham, 2016), \emph{ggpubr} (Version 0.4.0; Kassambara, 2020a), \emph{GPArotation} (Version 2014.11.1; Bernaards \& I.Jennrich, 2005), \emph{here} (Version 0.1; Müller, 2017), \emph{janitor} (Version 2.0.1; Firke, 2020), \emph{kableExtra} (Version 1.3.1; Zhu, 2020), \emph{knitr} (Version 1.30; Xie, 2015), \emph{MASS} (Version 7.3.53; Venables \& Ripley, 2002), \emph{papaja} (Version 0.1.0.9997; Aust \& Barth, 2020), \emph{paran} (Version 1.5.2; Dinno, 2018), \emph{psych} (Version 2.0.9; Revelle, 2020), \emph{purrr} (Version 0.3.4; Henry \& Wickham, 2020), \emph{readr} (Version 1.4.0; Wickham, Hester, \& Francois, 2018), \emph{rio} (Version 0.5.16; Chan, Chan, Leeper, \& Becker, 2018), \emph{rstatix} (Version 0.6.0; Kassambara, 2020b), \emph{scales} (Version 1.1.1; Wickham \& Seidel, 2019), \emph{stringr} (Version 1.4.0; Wickham, 2019b), \emph{tibble} (Version 3.0.4; Müller \& Wickham, 2020), \emph{tidyr} (Version 1.1.2; Wickham, 2020), \emph{tidyverse} (Version 1.3.0; Wickham, Averick, et al., 2019), \emph{tinytex} (Version 0.27; Xie, 2019), and \emph{usethis} (Version 1.6.3; Wickham \& Bryan, 2020) for all our analyses. Items were reverse scored if needed and total scores were obtained on the Big 5 variables for every participant. We obtained descriptive statistics for all the Big five variables. We used Principal components analysis to study the factor structure of the present data. Parallel analysis was computed to determine the number of factors to be extracted. These factors were further rotated using varimax and oblimin rotations.
+We used R {[}Version 4.0.2; R Core Team (2019){]} and the R-packages \emph{dbplyr} {[}Version 2.0.0; Wickham and Ruiz (2019){]}, \emph{devtools} {[}Version 2.3.2; Wickham, Hester, and Chang (2020){]}, \emph{dplyr} {[}Version 1.0.2; Wickham, François, Henry, and Müller (2020){]}, \emph{forcats} {[}Version 0.5.0; Wickham (2019a){]}, \emph{gapminder} (Bryan, 2017), \emph{ggplot2} {[}Version 3.3.2; Wickham (2016){]}, \emph{ggpubr} {[}Version 0.4.0; Kassambara (2020a){]}, \emph{GPArotation} {[}Version 2014.11.1; Bernaards and I.Jennrich (2005){]}, \emph{here} {[}Version 1.0.0; Müller (2017){]}, \emph{janitor} {[}Version 2.0.1; Firke (2020){]}, \emph{kableExtra} {[}Version 1.3.1; Zhu (2020){]}, \emph{knitr} {[}Version 1.30; Xie (2015){]}, \emph{MASS} {[}Version 7.3.53; Venables and Ripley (2002){]}, \emph{papaja} {[}Version 0.1.0.9997; Aust and Barth (2020){]}, \emph{paran} {[}Version 1.5.2; Dinno (2018){]}, \emph{psych} {[}Version 2.0.9; Revelle (2020){]}, \emph{purrr} {[}Version 0.3.4; Henry and Wickham (2020){]}, \emph{readr} {[}Version 1.4.0; Wickham, Hester, and Francois (2018){]}, \emph{rio} {[}Version 0.5.16; Chan, Chan, Leeper, and Becker (2018){]}, \emph{rstatix} {[}Version 0.6.0; Kassambara (2020b){]}, \emph{scales} {[}Version 1.1.1; Wickham and Seidel (2019){]}, \emph{stringr} {[}Version 1.4.0; Wickham (2019b){]}, \emph{tibble} {[}Version 3.0.4; Müller and Wickham (2020){]}, \emph{tidyr} {[}Version 1.1.2; Wickham (2020){]}, \emph{tidyverse} {[}Version 1.3.0; Wickham et al. (2019){]}, \emph{tinytex} {[}Version 0.27; Xie (2019){]}, and \emph{usethis} {[}Version 1.6.3; Wickham and Bryan (2020){]} for all our analyses. Items were reverse scored if needed and total scores were obtained on the Big 5 variables for every participant. We obtained descriptive statistics for all the Big five variables. We used Principal components analysis to study the factor structure of the present data. Parallel analysis was computed to determine the number of factors to be extracted. These factors were further rotated using varimax and oblimin rotations.
 
 Then, we gathered data only from Great Britain and Indian participants who identified as either male or female, and were between the ages of 18 and 80. A 2x2 between-subjects ANOVA was used to analyze main effects and interactions on openness scores for both country (Great Britain vs.~India) and gender (Male vs.~Female).
 
@@ -380,16 +407,16 @@ O4r & 0.07 & -0.12 & 0.10 & -0.09 & 0.23 & 0.45 & 0.58\\
 \begin{center}
 \begin{threeparttable}
 
-\caption{\label{tab:anova_descriptives_table}Summary Table for Openness Scores by Country and Gender}
+\caption{\label{tab:anovaDescriptives}Summary Table for Openness Scores by Country and Gender}
 
-\begin{tabular}{cccc}
+\begin{tabular}{ccccc}
 \toprule
-country & \multicolumn{1}{c}{gender} & \multicolumn{1}{c}{mean\_o} & \multicolumn{1}{c}{sd\_o}\\
+country & \multicolumn{1}{c}{gender} & \multicolumn{1}{c}{n} & \multicolumn{1}{c}{mean} & \multicolumn{1}{c}{sd}\\
 \midrule
-GB & Female & 24.90 & 3.36\\
-GB & Male & 26.35 & 3.32\\
-IN & Female & 24.16 & 3.59\\
-IN & Male & 24.52 & 3.58\\
+GB & Female & 660.00 & 24.90 & 3.36\\
+GB & Male & 462.00 & 26.36 & 3.32\\
+IN & Female & 531.00 & 24.16 & 3.59\\
+IN & Male & 795.00 & 24.52 & 3.58\\
 \bottomrule
 \addlinespace
 \end{tabular}
@@ -408,7 +435,7 @@ IN & Male & 24.52 & 3.58\\
 \begin{center}
 \begin{threeparttable}
 
-\caption{\label{tab:anova_summary_table}ANOVA table for Openness by Country and Gender}
+\caption{\label{tab:anovaResults}ANOVA table for Openness by Country and Gender}
 
 \begin{tabular}{lrcrrrl}
 \toprule
@@ -437,34 +464,29 @@ Country $\times$ Gender & 14.70 & 1 & 2,444 & 12.07 & < .001 & .006\\
 \caption{\label{fig:boxplot}Boxplot of Openness Scores by Country and Gender}
 \end{figure}
 
-\begin{verbatim}
-## Warning: `fun.y` is deprecated. Use `fun` instead.
-
-## Warning: `fun.y` is deprecated. Use `fun` instead.
-\end{verbatim}
-
 \begin{figure}
 \centering
-\includegraphics{final_project_files/figure-latex/interaction_plot-1.pdf}
-\caption{(\#fig:interaction\_plot)Interaction of Country and Gender on Openness}
+\includegraphics{final_project_files/figure-latex/interactionplot-1.pdf}
+\caption{\label{fig:interactionplot}Interaction of Country and Gender on Openness}
 \end{figure}
 
 \hypertarget{results}{%
 \section{Results}\label{results}}
 
 Table~\ref{tab:descriptiveTable} displays a summary of differences between males and females and Chronbach's alpha value for all Big 5 variables. There is a significant difference in all the variables for males and females except for Extraversion in this sample. We took a closer look at the error bars to see if there is any overlap. Figure~\ref{fig:errorbars} indicates a very high overlap for genders across Big 5 variables with an almost exact range for Extraversion. This indicates that there is not much difference in the levels of Big 5 in males and females in this sample. All the alpha values seem reasonably acceptable except for a low value for Openness.
+
 Parallel analysis (Horn's method) suggested 7 factors to be retained as seen in Figure~\ref{fig:parallel-analysis}. The seven factor solution was rotated using varimax and oblimin rotations. An examination of loadings matrix for varimax rotation Table~\ref{tab:varimaxTable} and structure matrix for oblimin rotation Table~\ref{tab:obliminTable} indicate a clear emergence of the first three factors -Extraversion, Neuroticism, Agreeableness - indicating the respective items with highest loading on those factors. The last two factors - Conscientiousness and Openness - tend to split into multiple factors.
 
-A 2x2 (Country: Great Britain vs.~India; Gender: Male vs.~Female) between-subjects ANOVA was run to analyze a main effect of country, a main effect of gender, and an interaction between the two on the personality trait openness. It was hypothesized first, that there would be a main effect of country where Great Britain would show higher openness scores compared to India. Second, we predicted an interaction where males would score higher than females on trait openness in Great Britain, but not in India. There was no prediction for overall gender differences in openness. See Table~@ref(tab:anova\_summary\_table) for a summary of openness means and standard deviations by country and gender.
+A 2x2 (Country: Great Britain vs.~India; Gender: Male vs.~Female) between-subjects ANOVA was run to analyze a main effect of country, a main effect of gender, and an interaction between the two on the personality trait openness. It was hypothesized first, that there would be a main effect of country where Great Britain would show higher openness scores compared to India. Second, we predicted an interaction where males would score higher than females on trait openness in Great Britain, but not in India. There was no prediction for overall gender differences in openness. See Table~\ref{tab:anovaDescriptives} for a summary of openness means and standard deviations by country and gender.
 
-Results found a main effect of country () such that participants from Great Britain (----) showed higher levels of openness compared to India (--). An overall main effect of gender was discovered (), finding that Males (--) scored higher than females (M--). See Figure~\ref{fig:barplot} and Figure~\ref{fig:boxplot} for graphical representations of group means. Finally, there was a significant interaction between country and gender (---). Males in Great Britain showed the highest levels of openness (----), and gender differences were more pronounced in Great Britain compared to India (see Figure~@ref(fig:interaction\_plot)).
+A summary of ANOVA results can be found in Table~\ref{tab:anovaResults}. We found a main effect of country, such that participants from Great Britain (\emph{M} = 25.5, \emph{SD} = 3.41) showed higher levels of openness compared to India (\emph{M} = 24.38, \emph{SD} = 3.59). An overall main effect of gender was discovered (---), finding that Males (\emph{M} = 25.19, \emph{SD} = 3.6) scored higher than females (\emph{M} = 24.57, \emph{SD} = 3.48). See Figure~\ref{fig:barplot} and Figure~\ref{fig:boxplot} for graphical representations of group means. Finally, there was a significant interaction between country and gender (---). Males in Great Britain showed the highest levels of openness (----), and gender differences were more pronounced in Great Britain compared to India (see Figure~\ref{fig:interactionplot}).
 
 \hypertarget{discussion}{%
 \section{Discussion}\label{discussion}}
 
 Although the t-test indicated significant differences overlaps seen in the errorbars indicate that no main differences can be seen in the plots. Openness and conscientiousness split into more factors which indicate a rather interesting groupings of variables into factors for this data. One could further look at inter item consistency values for these groups of 7 factors for the data.
 
-Our results display important information about personality comparisons between genders within different regions of the globe. In-line with predictions, participants from Great Britain showed higher openness scores than Indian participants. This is likely due to cultural differences, with Great Britain being relatively more liberal and willing to challenging traditional beliefs. It was surprising to find overall gender differences in openness, given much prior research has failed to find such effects (baer2008; {\textbf{???}}; {\textbf{???}}). It could be that in both Great Britain and India, men are more free to express creativity, innovation, and aesthetic proclivities given their relative safety against retaliation for challenging past methods and beliefs. Perhaps women feel they have more to lose by expressing alternative viewpoints, and therefore report less willingness to engage in challenging the status quo. Finally, men in Great Britain reported the highest levels of openness. This could be a combined effect of both cultural differences (Great Britain being more welcoming to non-traditional gender expression) and men feeling more safe overall to engage in non-traditional beliefs and activities. Future research should break down the openness trait into sub-categories and assess gender differences by categories within openness (i.e., openness to ideas, openness to feelings, openness to aesthetic experiences) to parse apart more nuanced gender differences. Additionally, future research should obtain more demographic data on political and religious attitudes (to assess liberal vs.~traditionalist mindsets).
+Our results display important information about personality comparisons between genders within different regions of the globe. In-line with predictions, participants from Great Britain showed higher openness scores than Indian participants. This is likely due to cultural differences, with Great Britain being relatively more liberal and willing to challenging traditional beliefs. It was surprising to find overall gender differences in openness, given much prior research has failed to find such effects {[}baer2008; (\textbf{costa2001?}); (\textbf{silva2010?}){]}. It could be that in both Great Britain and India, men are more free to express creativity, innovation, and aesthetic proclivities given their relative safety against retaliation for challenging past methods and beliefs. Perhaps women feel they have more to lose by expressing alternative viewpoints, and therefore report less willingness to engage in challenging the status quo. Finally, men in Great Britain reported the highest levels of openness. This could be a combined effect of both cultural differences (Great Britain being more welcoming to non-traditional gender expression) and men feeling more safe overall to engage in non-traditional beliefs and activities. Future research should break down the openness trait into sub-categories and assess gender differences by categories within openness (i.e., openness to ideas, openness to feelings, openness to aesthetic experiences) to parse apart more nuanced gender differences. Additionally, future research should obtain more demographic data on political and religious attitudes (to assess liberal vs.~traditionalist mindsets).
 
 Overall, our findings support the need for breaking down personality traits into more factors that better reflect true personality differences. Further, we found regional and gender differences such that men report higher levels of openness than women, citizens of Great Britain report higher levels of openness compared to India, and that gender differences in Great Britain are more pronounced than gender differences in India on this trait. We hope that future work can further explore cultural factors that can influences such individual variation in personality.
 
@@ -478,8 +500,9 @@ Overall, our findings support the need for breaking down personality traits into
 \setlength{\leftskip}{0.5in}
 
 \hypertarget{refs}{}
+\begin{CSLReferences}{1}{0}
 \leavevmode\hypertarget{ref-R-papaja}{}%
-Aust, F., \& Barth, M. (2020). \emph{papaja: Create APA manuscripts with R Markdown}. Retrieved from \url{https://github.com/crsh/papaja}
+Aust, F., \& Barth, M. (2020). \emph{{papaja}: {Create} {APA} manuscripts with {R Markdown}}. Retrieved from \url{https://github.com/crsh/papaja}
 
 \leavevmode\hypertarget{ref-R-GPArotation}{}%
 Bernaards, C. A., \& I.Jennrich, R. (2005). Gradient projection algorithms and software for arbitrary rotation criteria in factor analysis. \emph{Educational and Psychological Measurement}, \emph{65}, 676--696.
@@ -488,7 +511,7 @@ Bernaards, C. A., \& I.Jennrich, R. (2005). Gradient projection algorithms and s
 Bryan, J. (2017). \emph{Gapminder: Data from gapminder}. Retrieved from \url{https://CRAN.R-project.org/package=gapminder}
 
 \leavevmode\hypertarget{ref-R-rio}{}%
-Chan, C.-h., Chan, G. C., Leeper, T. J., \& Becker, J. (2018). \emph{Rio: A swiss-army knife for data file i/o}.
+Chan, C., Chan, G. C., Leeper, T. J., \& Becker, J. (2018). \emph{Rio: A swiss-army knife for data file i/o}.
 
 \leavevmode\hypertarget{ref-R-paran}{}%
 Dinno, A. (2018). \emph{Paran: Horn's test of principal components/factors}. Retrieved from \url{https://CRAN.R-project.org/package=paran}
@@ -500,7 +523,7 @@ Firke, S. (2020). \emph{Janitor: Simple tools for examining and cleaning dirty d
 Henry, L., \& Wickham, H. (2020). \emph{Purrr: Functional programming tools}. Retrieved from \url{https://CRAN.R-project.org/package=purrr}
 
 \leavevmode\hypertarget{ref-R-ggpubr}{}%
-Kassambara, A. (2020a). \emph{Ggpubr: 'Ggplot2' based publication ready plots}. Retrieved from \url{https://CRAN.R-project.org/package=ggpubr}
+Kassambara, A. (2020a). \emph{Ggpubr: 'ggplot2' based publication ready plots}. Retrieved from \url{https://CRAN.R-project.org/package=ggpubr}
 
 \leavevmode\hypertarget{ref-R-rstatix}{}%
 Kassambara, A. (2020b). \emph{Rstatix: Pipe-friendly framework for basic statistical tests}. Retrieved from \url{https://CRAN.R-project.org/package=rstatix}
@@ -521,7 +544,7 @@ Revelle, W. (2020). \emph{Psych: Procedures for psychological, psychometric, and
 Venables, W. N., \& Ripley, B. D. (2002). \emph{Modern applied statistics with s} (Fourth). New York: Springer. Retrieved from \url{http://www.stats.ox.ac.uk/pub/MASS4}
 
 \leavevmode\hypertarget{ref-R-ggplot2}{}%
-Wickham, H. (2016). \emph{Ggplot2: Elegant graphics for data analysis}. Springer-Verlag New York. Retrieved from \url{https://ggplot2.tidyverse.org}
+Wickham, H. (2016). \emph{ggplot2: Elegant graphics for data analysis}. Springer-Verlag New York. Retrieved from \url{https://ggplot2.tidyverse.org}
 
 \leavevmode\hypertarget{ref-R-forcats}{}%
 Wickham, H. (2019a). \emph{Forcats: Tools for working with categorical variables (factors)}. Retrieved from \url{https://CRAN.R-project.org/package=forcats}
@@ -533,16 +556,16 @@ Wickham, H. (2019b). \emph{Stringr: Simple, consistent wrappers for common strin
 Wickham, H. (2020). \emph{Tidyr: Tidy messy data}. Retrieved from \url{https://CRAN.R-project.org/package=tidyr}
 
 \leavevmode\hypertarget{ref-R-tidyverse}{}%
-Wickham, H., Averick, M., Bryan, J., Chang, W., McGowan, L. D., François, R., \ldots{} Yutani, H. (2019). Welcome to the tidyverse. \emph{Journal of Open Source Software}, \emph{4}(43), 1686. \url{https://doi.org/10.21105/joss.01686}
+Wickham, H., Averick, M., Bryan, J., Chang, W., McGowan, L. D., François, R., \ldots{} Yutani, H. (2019). Welcome to the {tidyverse}. \emph{Journal of Open Source Software}, \emph{4}(43), 1686. \url{https://doi.org/10.21105/joss.01686}
 
 \leavevmode\hypertarget{ref-R-usethis}{}%
 Wickham, H., \& Bryan, J. (2020). \emph{Usethis: Automate package and project setup}. Retrieved from \url{https://CRAN.R-project.org/package=usethis}
 
 \leavevmode\hypertarget{ref-R-dplyr}{}%
-Wickham, H., François, R., Henry, L., \& Müller, K. (2020a). \emph{Dplyr: A grammar of data manipulation}. Retrieved from \url{https://CRAN.R-project.org/package=dplyr}
+Wickham, H., François, R., Henry, L., \& Müller, K. (2020). \emph{Dplyr: A grammar of data manipulation}. Retrieved from \url{https://CRAN.R-project.org/package=dplyr}
 
 \leavevmode\hypertarget{ref-R-devtools}{}%
-Wickham, H., Hester, J., \& Chang, W. (2020b). \emph{Devtools: Tools to make developing r packages easier}. Retrieved from \url{https://CRAN.R-project.org/package=devtools}
+Wickham, H., Hester, J., \& Chang, W. (2020). \emph{Devtools: Tools to make developing r packages easier}. Retrieved from \url{https://CRAN.R-project.org/package=devtools}
 
 \leavevmode\hypertarget{ref-R-readr}{}%
 Wickham, H., Hester, J., \& Francois, R. (2018). \emph{Readr: Read rectangular text data}. Retrieved from \url{https://CRAN.R-project.org/package=readr}
@@ -554,13 +577,15 @@ Wickham, H., \& Ruiz, E. (2019). \emph{Dbplyr: A 'dplyr' back end for databases}
 Wickham, H., \& Seidel, D. (2019). \emph{Scales: Scale functions for visualization}. Retrieved from \url{https://CRAN.R-project.org/package=scales}
 
 \leavevmode\hypertarget{ref-R-knitr}{}%
-Xie, Y. (2015). \emph{Dynamic documents with R and knitr} (2nd ed.). Boca Raton, Florida: Chapman; Hall/CRC. Retrieved from \url{https://yihui.org/knitr/}
+Xie, Y. (2015). \emph{Dynamic documents with {R} and knitr} (2nd ed.). Boca Raton, Florida: Chapman; Hall/CRC. Retrieved from \url{https://yihui.org/knitr/}
 
 \leavevmode\hypertarget{ref-R-tinytex}{}%
-Xie, Y. (2019). TinyTeX: A lightweight, cross-platform, and easy-to-maintain latex distribution based on tex live. \emph{TUGboat}, (1), 30--32. Retrieved from \url{http://tug.org/TUGboat/Contents/contents40-1.html}
+Xie, Y. (2019). TinyTeX: A lightweight, cross-platform, and easy-to-maintain LaTeX distribution based on TeX live. \emph{TUGboat}, (1), 30--32. Retrieved from \url{http://tug.org/TUGboat/Contents/contents40-1.html}
 
 \leavevmode\hypertarget{ref-R-kableExtra}{}%
-Zhu, H. (2020). \emph{KableExtra: Construct complex table with 'kable' and pipe syntax}. Retrieved from \url{https://CRAN.R-project.org/package=kableExtra}
+Zhu, H. (2020). \emph{kableExtra: Construct complex table with 'kable' and pipe syntax}. Retrieved from \url{https://CRAN.R-project.org/package=kableExtra}
+
+\end{CSLReferences}
 
 \endgroup
 

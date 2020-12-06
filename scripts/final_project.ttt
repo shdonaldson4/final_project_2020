@@ -187,16 +187,16 @@ O4r & 0.07 & -0.12 & 0.10 & -0.09 & 0.23 & 0.45 & 0.58\\
 \begin{center}
 \begin{threeparttable}
 
-\caption{\label{tab:anova_descriptives_table}Summary Table for Openness Scores by Country and Gender}
+\caption{\label{tab:anovaDescriptives}Summary Table for Openness Scores by Country and Gender}
 
-\begin{tabular}{cccc}
+\begin{tabular}{ccccc}
 \toprule
-country & \multicolumn{1}{c}{gender} & \multicolumn{1}{c}{mean\_o} & \multicolumn{1}{c}{sd\_o}\\
+country & \multicolumn{1}{c}{gender} & \multicolumn{1}{c}{n} & \multicolumn{1}{c}{mean} & \multicolumn{1}{c}{sd}\\
 \midrule
-GB & Female & 24.90 & 3.36\\
-GB & Male & 26.35 & 3.32\\
-IN & Female & 24.16 & 3.59\\
-IN & Male & 24.52 & 3.58\\
+GB & Female & 660.00 & 24.90 & 3.36\\
+GB & Male & 462.00 & 26.36 & 3.32\\
+IN & Female & 531.00 & 24.16 & 3.59\\
+IN & Male & 795.00 & 24.52 & 3.58\\
 \bottomrule
 \addlinespace
 \end{tabular}
@@ -216,7 +216,7 @@ IN & Male & 24.52 & 3.58\\
 \begin{center}
 \begin{threeparttable}
 
-\caption{\label{tab:anova_summary_table}ANOVA table for Openness by Country and Gender}
+\caption{\label{tab:anovaResults}ANOVA table for Openness by Country and Gender}
 
 \begin{tabular}{lrcrrrl}
 \toprule

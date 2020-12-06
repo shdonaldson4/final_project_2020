@@ -30,6 +30,6 @@
 \ifnextchar[{\eatarg}{}
 
 \centering
-\includegraphics{final_project_files/figure-latex/interaction_plot-1.pdf}
-\caption{(\#fig:interaction\_plot)Interaction of Country and Gender on Openness}
+\includegraphics{final_project_files/figure-latex/interactionplot-1.pdf}
+\caption{\label{fig:interactionplot}Interaction of Country and Gender on Openness}
 \end{figure*}
