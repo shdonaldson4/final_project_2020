@@ -82,7 +82,6 @@ devtools::install_github("rkabacoff/factorAnalysis") #Not on cran
 library("papaja")
 library(rstatix)
 library(ggpubr)
-#library(car)
 
 
 r_refs("r-references.bib")
