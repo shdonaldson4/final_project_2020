@@ -82,7 +82,7 @@ devtools::install_github("rkabacoff/factorAnalysis") #Not on cran
 library("papaja")
 library(rstatix)
 library(ggpubr)
-library(car)
+#library(car)
 
 
 r_refs("r-references.bib")
@@ -92,9 +92,9 @@ raw_data = import(here("data", "data.csv"), setclass = "tbl_df")
 
 
 # Introduction 
-The Five Factor Model of personality structure (FFM) proposes that personality can be divided into five unique facets: Extraversion, Openness to Experience, Agreeableness, Conscientiousness, and Neuroticism. Typically, the Big Five Personality Inventory [BFI; @john1991]  has garnered support due to a strict extraction of these five factors. However, this has limited the scope of how personality has been understood across cultures. There is a need to understand the emic structures over imposing etic structures on datasets. We need to focus on how we could add a more stringent way of unearthing personality models. A more robust model would be the one that emerges through emic methods rather than etic methods. Using a large, open-source dataset, we will investigate whether the FFM remains true for U.S. participants. As an exploratory analysis, there is no prediction as to the number of factors that may emerge.
+The Five Factor Model of personality structure (FFM) proposes that personality can be divided into five unique facets: Extraversion, Openness to Experience, Agreeableness, Conscientiousness, and Neuroticism. Typically, the Big Five Personality Inventory (BFI; [@john1991]) has garnered support due to a strict extraction of these five factors. However, this has limited the scope of how personality has been understood across cultures. There is a need to understand the emic structures over imposing etic structures on datasets. We need to focus on how we could add a more stringent way of unearthing personality models. A more robust model would be the one that emerges through emic methods rather than etic methods. Using a large, open-source dataset, we will investigate whether the FFM remains true for U.S. participants. As an exploratory analysis, there is no prediction as to the number of factors that may emerge.
 
-The comparison of personality factors between genders and countries is important to our understanding of general human variation [@weisberg2011]. The trait of openness to experience (OE) reflects imagination, creativity, intellectual curiosity, and an appreciation for new, complex, aesthetic experiences [@weisberg2011]. Gender comparisons on this trait are mixed world-wide. As an overall factor, very few gender differences are found [baer2008; @costa2001; @silva2010]. It is only when this factor is broken down into sub-categories that gender differences emerge. For example, men tend to score higher on openness to ideas, while women have been found to score higher than men on openness to aesthetics and feelings [@costa2001; @weisberg2011]. Further, the extent of gender differences in openness differs by country, with larger differences found in countries with more traditional male and female gender roles, such as in eastern cultures [@costa2001]. Therefore, comparing personality differences by gender and country can identify important cultural distinctions on typical gender stereotypes.
+The comparison of personality factors between genders and countries is important to our understanding of general human variation [@weisberg2011]. The trait of openness to experience (OE) reflects imagination, creativity, intellectual curiosity, and an appreciation for new, complex, aesthetic experiences [@weisberg2011]. Gender comparisons on this trait are mixed world-wide. As an overall factor, very few gender differences are found [baer2008; @costa2001; @silvia2010]. It is only when this factor is broken down into sub-categories that gender differences emerge. For example, men tend to score higher on openness to ideas, while women have been found to score higher than men on openness to aesthetics and feelings [@costa2001; @weisberg2011]. Further, the extent of gender differences in openness differs by country, with larger differences found in countries with more traditional male and female gender roles, such as in eastern cultures [@costa2001]. Therefore, comparing personality differences by gender and country can identify important cultural distinctions on typical gender stereotypes.
 
 This study investigated gender differences by country, comparing Great Britain (including England, Whales, and Scotland, but not Northern Ireland) to India. These countries are compared because they are represented in roughly even numbers in this dataset, and because of their cultural differences in gender stereotypes. Great Britain has had more open and accepting views of gender roles over a longer period of time compared to more conservative, traditional stereotypes upheld in many Indian cultures until relatively recently [@saewyc2017]. Thus, we predict a main effect of country such that Great Britain will display higher overall openness scores compared to India. Given mixed findings on gender differences [@costa2001] no prediction was made for a main effect of gender on openness. Finally, it was predicted that gender differences will emerge in Great Britain, but not in India, with men scoring higher than women in Great Britain on this trait. Due to the more relaxed attitudes towards gender role conformity in Great Britain, it is likely that men are more comfortable reporting openness traits of creativity, intellectual curiosity, and an appreciation for aesthetics in Great Britain, while Indian men are more likely to conform to traditionalist views.
 
@@ -122,7 +122,7 @@ data = raw_data %>%
                          `2` = "Female",
                          `3` = "Other")) %>% 
   filter(gender != "Other") %>% #retain only males and females
-  mutate(gender = as.factor(gender)) 
+  dplyr::mutate(gender = as.factor(gender)) %>% 
     rowwise() %>%
   #score variables, r annoted are reverse scored items
   mutate(E4r = (6-E4), 
@@ -230,7 +230,7 @@ anova_data_wide = raw_data %>%
   filter(country %in% c("GB", "IN"), age >=18 & age <= 80) %>%   #Use ONLY Great Britain and India cases, and age between 18 and 80 years
   mutate(country = as.factor(country)) %>% 
   filter_if(is.numeric, all_vars((.) != 0)) %>%  #dropping all rows with missing values
-  mutate(gender = recode(gender, `1` = "Male", `2` = "Female", `3` = "Other")) %>%
+  dplyr::mutate(gender = recode(gender, `1` = "Male", `2` = "Female", `3` = "Other")) %>%
   filter(gender != "Other") %>% #retain only males and females
   mutate(gender = as.factor(gender)) %>%
   select(c(age,country,gender,O1:O10)) %>%
@@ -347,13 +347,17 @@ PCA.data = data %>%
 ```
 
 
-```{r parallel-analysis, fig.cap = "Parallel analysis", echo = F, fig.height = 6.5, warning = F}
+```{r parallel-analysis, include=FALSE}
 
-factorAnalysis::screePlot(cor(PCA.data), method="pc", n.obs=nrow(PCA.data))
+scree <- factorAnalysis::screePlot(cor(PCA.data), method="pc", n.obs=nrow(PCA.data))
 
 ```
 
+```{r scree, fig.cap = "Parallel analysis", echo = F, fig.height = 6.5, warning = F}
 
+scree
+
+```
 
 ```{r Rotations, eval=TRUE, echo=FALSE, include=FALSE}
   ##Varimax rotation
@@ -490,7 +494,7 @@ A summary of ANOVA results can be found in Table\ \@ref(tab:anovaResults). We fo
 # Discussion
   Although the t-test indicated significant differences overlaps seen in the errorbars indicate that no main differences can be seen in the plots. Openness and conscientiousness split into more factors which indicate a rather interesting groupings of variables into factors for this data. One could further look at inter item consistency values for these groups of 7 factors for the data. 
 
-Our results display important information about personality comparisons between genders within different regions of the globe. In-line with predictions, participants from Great Britain showed higher openness scores than Indian participants. This is likely due to cultural differences, with Great Britain being relatively more liberal and willing to challenging traditional beliefs. It was surprising to find overall gender differences in openness, given much prior research has failed to find such effects [baer2008; @costa2001; @silva2010]. It could be that in both Great Britain and India, men are more free to express creativity, innovation, and aesthetic proclivities given their relative safety against retaliation for challenging past methods and beliefs. Perhaps women feel they have more to lose by expressing alternative viewpoints, and therefore report less willingness to engage in challenging the status quo. Finally, men in Great Britain reported the highest levels of openness. This could be a combined effect of both cultural differences (Great Britain being more welcoming to non-traditional gender expression) and men feeling more safe overall to engage in non-traditional beliefs and activities. Future research should break down the openness trait into sub-categories and assess gender differences by categories within openness (i.e., openness to ideas, openness to feelings, openness to aesthetic experiences) to parse apart more nuanced gender differences. Additionally, future research should obtain more demographic data on political and religious attitudes (to assess liberal vs. traditionalist mindsets).
+Our results display important information about personality comparisons between genders within different regions of the globe. In-line with predictions, participants from Great Britain showed higher openness scores than Indian participants. This is likely due to cultural differences, with Great Britain being relatively more liberal and willing to challenging traditional beliefs. It was surprising to find overall gender differences in openness, given much prior research has failed to find such effects [baer2008; @costa2001; @silvia2010]. It could be that in both Great Britain and India, men are more free to express creativity, innovation, and aesthetic proclivities given their relative safety against retaliation for challenging past methods and beliefs. Perhaps women feel they have more to lose by expressing alternative viewpoints, and therefore report less willingness to engage in challenging the status quo. Finally, men in Great Britain reported the highest levels of openness. This could be a combined effect of both cultural differences (Great Britain being more welcoming to non-traditional gender expression) and men feeling more safe overall to engage in non-traditional beliefs and activities. Future research should break down the openness trait into sub-categories and assess gender differences by categories within openness (i.e., openness to ideas, openness to feelings, openness to aesthetic experiences) to parse apart more nuanced gender differences. Additionally, future research should obtain more demographic data on political and religious attitudes (to assess liberal vs. traditionalist mindsets).
 
 Overall, our findings support the need for breaking down personality traits into more factors that better reflect true personality differences. Further, we found regional and gender differences such that men report higher levels of openness than women, citizens of Great Britain report higher levels of openness compared to India, and that gender differences in Great Britain are more pronounced than gender differences in India on this trait. We hope that future work can further explore cultural factors that can influences such individual variation in personality.
 

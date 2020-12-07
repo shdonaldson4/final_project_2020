@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.12.6)  6 DEC 2020 14:28
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.12.6)  6 DEC 2020 19:49
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -692,12 +692,22 @@ ap}
 \openout4 = `final_project.fff'.
 
 (final_project.fff)
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 2
-44.
-(/Users/sdonalds/Library/TinyTeX/texmf-dist/tex/latex/lm/t1lmtt.fd
-File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-) [6] [7] [8] [9] [10] AED endfloat: Processing end Figures and Tables [11] (./
-final_project.ttt
+
+LaTeX Warning: Reference `fig:parallel-analysis' on page 6 undefined on input l
+ine 473.
+
+[6] [7] [8] [9pdfTeX warning (ext4): destination with the same identifier (name
+{ref-R-papaja}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  
+l.531 
+      ] [10pdfTeX warning (ext4): destination with the same identifier (name{re
+f-R-base}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  
+l.567 
+      ] [11] AED endfloat: Processing end Figures and Tables [12] (./final_proj
+ect.ttt
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <5> on input line 42.
 
@@ -706,38 +716,36 @@ LaTeX Warning: Float too large for page by 57.66295pt on input line 106.
 
 LaTeX Warning: Float too large for page by 57.66295pt on input line 182.
 
-) [12
+) [13
 
 
-] [13] [14] [15] (./final_project.fff
-<final_project_files/figure-latex/errorbars-1.pdf, id=198, 578.16pt x 469.755pt
+] [14] [15] [16] (./final_project.fff
+<final_project_files/figure-latex/errorbars-1.pdf, id=213, 578.16pt x 469.755pt
 >
 File: final_project_files/figure-latex/errorbars-1.pdf Graphic file (type pdf)
 <use final_project_files/figure-latex/errorbars-1.pdf>
 Package pdftex.def Info: final_project_files/figure-latex/errorbars-1.pdf  used
  on input line 5.
 (pdftex.def)             Requested size: 469.75385pt x 381.675pt.
-<final_project_files/figure-latex/parallel-analysis-1.pdf, id=199, 578.16pt x 4
-69.755pt>
-File: final_project_files/figure-latex/parallel-analysis-1.pdf Graphic file (ty
-pe pdf)
-<use final_project_files/figure-latex/parallel-analysis-1.pdf>
-Package pdftex.def Info: final_project_files/figure-latex/parallel-analysis-1.p
-df  used on input line 12.
+<final_project_files/figure-latex/scree-1.pdf, id=214, 578.16pt x 469.755pt>
+File: final_project_files/figure-latex/scree-1.pdf Graphic file (type pdf)
+<use final_project_files/figure-latex/scree-1.pdf>
+Package pdftex.def Info: final_project_files/figure-latex/scree-1.pdf  used on 
+input line 12.
 (pdftex.def)             Requested size: 469.75385pt x 381.675pt.
-<final_project_files/figure-latex/barplot-1.pdf, id=200, 578.16pt x 505.89pt>
+<final_project_files/figure-latex/barplot-1.pdf, id=215, 578.16pt x 505.89pt>
 File: final_project_files/figure-latex/barplot-1.pdf Graphic file (type pdf)
 <use final_project_files/figure-latex/barplot-1.pdf>
 Package pdftex.def Info: final_project_files/figure-latex/barplot-1.pdf  used o
 n input line 19.
 (pdftex.def)             Requested size: 469.75385pt x 411.0346pt.
-<final_project_files/figure-latex/boxplot-1.pdf, id=201, 578.16pt x 505.89pt>
+<final_project_files/figure-latex/boxplot-1.pdf, id=216, 578.16pt x 505.89pt>
 File: final_project_files/figure-latex/boxplot-1.pdf Graphic file (type pdf)
 <use final_project_files/figure-latex/boxplot-1.pdf>
 Package pdftex.def Info: final_project_files/figure-latex/boxplot-1.pdf  used o
 n input line 26.
 (pdftex.def)             Requested size: 469.75385pt x 411.0346pt.
-<final_project_files/figure-latex/interactionplot-1.pdf, id=202, 578.16pt x 469
+<final_project_files/figure-latex/interactionplot-1.pdf, id=217, 578.16pt x 469
 .755pt>
 File: final_project_files/figure-latex/interactionplot-1.pdf Graphic file (type
  pdf)
@@ -745,24 +753,26 @@ File: final_project_files/figure-latex/interactionplot-1.pdf Graphic file (type
 Package pdftex.def Info: final_project_files/figure-latex/interactionplot-1.pdf
   used on input line 33.
 (pdftex.def)             Requested size: 469.75385pt x 381.675pt.
-) [16
+) [17
 
- <./final_project_files/figure-latex/errorbars-1.pdf>] [17 <./final_project_fil
-es/figure-latex/parallel-analysis-1.pdf>] [18 <./final_project_files/figure-lat
-ex/barplot-1.pdf>] [19 <./final_project_files/figure-latex/boxplot-1.pdf>] [20 
-<./final_project_files/figure-latex/interactionplot-1.pdf>] (./final_project.au
-x)
+ <./final_project_files/figure-latex/errorbars-1.pdf>] [18 <./final_project_fil
+es/figure-latex/scree-1.pdf>] [19 <./final_project_files/figure-latex/barplot-1
+.pdf>] [20 <./final_project_files/figure-latex/boxplot-1.pdf>] [21 <./final_pro
+ject_files/figure-latex/interactionplot-1.pdf>] (./final_project.aux)
 Package rerunfilecheck Info: File `final_project.out' has not changed.
 (rerunfilecheck)             Checksum: 172E6E40AF34CFBB2B0288216F34F7FE;671.
+
+LaTeX Warning: There were undefined references.
+
  ) 
 Here is how much of TeX's memory you used:
- 14754 strings out of 481331
- 218764 string characters out of 5916839
+ 14723 strings out of 481331
+ 218149 string characters out of 5916839
  587350 words of memory out of 5000000
- 31236 multiletter control sequences out of 15000+600000
- 464724 words of font info for 74 fonts, out of 8000000 for 9000
+ 31199 multiletter control sequences out of 15000+600000
+ 464406 words of font info for 73 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 80i,13n,85p,2252b,628s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 80i,13n,85p,2532b,628s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/Users/sdonalds/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}
 {/Users/sdonalds/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/
 Users/sdonalds/Library/TinyTeX/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/Users/
@@ -774,12 +784,11 @@ ary/TinyTeX/texmf-dist/fonts/type1/public/lm/lmr12.pfb></Users/sdonalds/Library
 /TinyTeX/texmf-dist/fonts/type1/public/lm/lmr6.pfb></Users/sdonalds/Library/Tin
 yTeX/texmf-dist/fonts/type1/public/lm/lmr8.pfb></Users/sdonalds/Library/TinyTeX
 /texmf-dist/fonts/type1/public/lm/lmri12.pfb></Users/sdonalds/Library/TinyTeX/t
-exmf-dist/fonts/type1/public/lm/lmsy10.pfb></Users/sdonalds/Library/TinyTeX/tex
-mf-dist/fonts/type1/public/lm/lmtt12.pfb>
-Output written on final_project.pdf (20 pages, 226003 bytes).
+exmf-dist/fonts/type1/public/lm/lmsy10.pfb>
+Output written on final_project.pdf (21 pages, 207790 bytes).
 PDF statistics:
- 311 PDF objects out of 1000 (max. 8388607)
- 267 compressed objects within 3 object streams
- 81 named destinations out of 1000 (max. 500000)
+ 326 PDF objects out of 1000 (max. 8388607)
+ 282 compressed objects within 3 object streams
+ 91 named destinations out of 1000 (max. 500000)
  82 words of extra memory for PDF output out of 10000 (max. 10000000)
 

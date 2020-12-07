@@ -222,9 +222,9 @@ IN & Male & 795.00 & 24.52 & 3.58\\
 \toprule
 Effect & \multicolumn{1}{c}{$F$} & \multicolumn{1}{c}{$\mathit{df}_1$} & \multicolumn{1}{c}{$\mathit{df}_2$} & \multicolumn{1}{c}{$\mathit{MSE}$} & \multicolumn{1}{c}{$p$} & \multicolumn{1}{c}{$\hat{\eta}^2_p$}\\
 \midrule
-Country & 63.84 & 1 & 2,444 & 12.07 & < .001 & .025\\
-Gender & 36.03 & 1 & 2,444 & 12.07 & < .001 & .015\\
-Country $\times$ Gender & 14.70 & 1 & 2,444 & 12.07 & < .001 & .006\\
+Gender & 47.46 & 1 & 2,444 & 12.07 & < .001 & .019\\
+Country & 13.32 & 1 & 2,444 & 12.07 & < .001 & .005\\
+Gender $\times$ Country & 14.70 & 1 & 2,444 & 12.07 & < .001 & .006\\
 \bottomrule
 \end{tabular}
 
