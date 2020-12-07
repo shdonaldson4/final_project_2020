@@ -117,8 +117,12 @@ data = raw_data %>%
   dplyr::select(-c(race,engnat,hand,source)) %>%  #retain only those columns required for the analysis
   filter(country == "US", age >=18 & age <= 80 ) %>%  #Use ONLY US cases, and age between 18 and 80 years
   filter_if(is.numeric, all_vars((.) != 0)) %>%  #dropping all rows with missing values
-  mutate(gender = recode(gender, `1` = "Male", `2` = "Female", `3` = "Other")) %>% 
+  mutate(gender = recode(gender,
+                         `1` = "Male",
+                         `2` = "Female",
+                         `3` = "Other")) %>% 
   filter(gender != "Other") %>% #retain only males and females
+  mutate(gender = as.factor(gender)) 
     rowwise() %>%
   #score variables, r annoted are reverse scored items
   mutate(E4r = (6-E4), 
@@ -480,7 +484,7 @@ Parallel analysis (Horn's method) suggested 7 factors to be retained as seen in 
 
 A 2x2 (Country: Great Britain vs. India; Gender: Male vs. Female) between-subjects ANOVA was run to analyze a main effect of country, a main effect of gender, and an interaction between the two on the personality trait openness. It was hypothesized first, that there would be a main effect of country where Great Britain would show higher openness scores compared to India. Second, we predicted an interaction where males would score higher than females on trait openness in Great Britain, but not in India. There was no prediction for overall gender differences in openness. See Table\ \@ref(tab:anovaDescriptives) for a summary of openness means and standard deviations by country and gender.
 
-A summary of ANOVA results can be found in Table\ \@ref(tab:anovaResults). We found a main effect of country, such that participants from Great Britain (*M* = `r round(GBmean, 2)`, *SD* = `r round(GB_sd, 2)`) showed higher levels of openness compared to India (*M* = `r round(INmean, 2)`, *SD* = `r round(IN_sd, 2)`). An overall main effect of gender was discovered (---), finding that Males (*M* = `r round(male_mean, 2)`, *SD* = `r round(male_sd, 2)`) scored higher than females (*M* = `r round(fem_mean, 2)`, *SD* = `r round(fem_sd, 2)`). See Figure\ \@ref(fig:barplot) and Figure\ \@ref(fig:boxplot) for graphical representations of group means. Finally, there was a significant interaction between country and gender (---). Males in Great Britain showed the highest levels of openness, and gender differences were more pronounced in Great Britain compared to India (see Figure\ \@ref(fig:interactionplot)).
+A summary of ANOVA results can be found in Table\ \@ref(tab:anovaResults). We found a main effect of country, such that participants from Great Britain (*M* = `r round(GBmean, 2)`, *SD* = `r round(GB_sd, 2)`) showed higher levels of openness compared to India (*M* = `r round(INmean, 2)`, *SD* = `r round(IN_sd, 2)`). An overall main effect of gender was discovered, finding that Males (*M* = `r round(male_mean, 2)`, *SD* = `r round(male_sd, 2)`) scored higher than females (*M* = `r round(fem_mean, 2)`, *SD* = `r round(fem_sd, 2)`). See Figure\ \@ref(fig:barplot) and Figure\ \@ref(fig:boxplot) for graphical representations of group means. Finally, there was a significant interaction between country and gender. Males in Great Britain showed the highest levels of openness, and gender differences were more pronounced in Great Britain compared to India (see Figure\ \@ref(fig:interactionplot)).
 
 
 # Discussion
